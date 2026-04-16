@@ -47,13 +47,35 @@ const bandDescriptions = {
 const sections = document.querySelector("#sections");
 const searchInput = document.querySelector("#search");
 const bandFilter = document.querySelector("#band-filter");
-const audio = document.querySelector("#audio");
+const audio = window.brainwavePlayer?.audio || document.querySelector("#audio");
 const playerTitle = document.querySelector("#player-title");
 const playerMeta = document.querySelector("#player-meta");
 const togglePlay = document.querySelector("#toggle-play");
 const volume = document.querySelector("#volume");
+const sharedBrainwavePlayer = window.brainwavePlayer || null;
 
 let currentTrackId = null;
+
+function syncPlayerUi() {
+  const state = sharedBrainwavePlayer?.getState?.();
+  if (!state?.src) {
+    currentTrackId = null;
+    playerTitle.textContent = "未播放";
+    playerMeta.textContent = "请选择一条脑波音轨";
+    togglePlay.textContent = "播放";
+    render();
+    return;
+  }
+
+  currentTrackId = state.trackId || tracks.find((track) => track.src === state.src)?.id || null;
+  playerTitle.textContent = state.title || "脑波音频";
+  playerMeta.textContent = state.meta || "继续播放中";
+  togglePlay.textContent = state.isPlaying ? "暂停" : "播放";
+  if (typeof state.volume === "number") {
+    volume.value = String(Math.round(state.volume * 100));
+  }
+  render();
+}
 
 function matchTrack(track) {
   const keyword = searchInput.value.trim().toLowerCase();
@@ -124,23 +146,25 @@ function playTrack(trackId) {
   if (!track) return;
 
   if (currentTrackId === trackId && !audio.paused) {
-    audio.pause();
+    sharedBrainwavePlayer?.pause?.();
     return;
   }
 
   currentTrackId = trackId;
-  audio.src = track.src;
-  audio.play().catch(() => {});
-  playerTitle.textContent = track.title;
-  playerMeta.textContent = `${track.band} · ${track.style} · ${track.duration} · ${track.note}`;
-  togglePlay.textContent = "暂停";
-  render();
+  sharedBrainwavePlayer?.setTrack?.({
+    src: track.src,
+    title: track.title,
+    meta: `${track.band} · ${track.style} · ${track.duration} · ${track.note}`,
+    trackId: track.id,
+    volume: Number(volume.value) / 100,
+  });
+  syncPlayerUi();
 }
 
 togglePlay.addEventListener("click", () => {
-  if (!audio.src) return;
-  if (audio.paused) audio.play().catch(() => {});
-  else audio.pause();
+  if (!audio.src && !sharedBrainwavePlayer?.getState?.().src) return;
+  if (audio.paused) sharedBrainwavePlayer?.play?.();
+  else sharedBrainwavePlayer?.pause?.();
 });
 
 audio.addEventListener("play", () => {
@@ -159,10 +183,16 @@ audio.addEventListener("ended", () => {
 });
 
 volume.addEventListener("input", () => {
-  audio.volume = Number(volume.value) / 100;
+  sharedBrainwavePlayer?.setVolume?.(Number(volume.value) / 100);
 });
 
 audio.volume = Number(volume.value) / 100;
+if (sharedBrainwavePlayer?.subscribe) {
+  sharedBrainwavePlayer.subscribe(() => {
+    syncPlayerUi();
+  });
+}
 searchInput.addEventListener("input", render);
 bandFilter.addEventListener("change", render);
 render();
+syncPlayerUi();

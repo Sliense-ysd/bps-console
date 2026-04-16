@@ -74,6 +74,7 @@ const moduleCount = document.querySelector("#module-count");
 const pinnedCount = document.querySelector("#pinned-count");
 const audioStatus = document.querySelector("#audio-status");
 const volumeControl = document.querySelector("#volume");
+const sharedBrainwavePlayer = window.brainwavePlayer || null;
 
 function loadPinnedIds() {
   try {
@@ -88,6 +89,22 @@ const pinned = new Set(loadPinnedIds());
 let pinnedOnly = false;
 let audioContext = null;
 let audioNodes = [];
+
+function updateBrainStatus() {
+  const sharedState = sharedBrainwavePlayer?.getState?.();
+  if (sharedState?.src) {
+    const stateLabel = sharedState.isPlaying ? "继续播放" : "已暂停";
+    audioStatus.textContent = `${stateLabel}：${sharedState.title || "脑波音频"}`;
+    if (typeof sharedState.volume === "number") {
+      volumeControl.value = String(Math.round(sharedState.volume * 100));
+    }
+    return;
+  }
+
+  if (!audioContext || audioNodes.length === 0) {
+    audioStatus.textContent = "空闲";
+  }
+}
 
 function persistPins() {
   try {
@@ -194,11 +211,13 @@ function stopAudio() {
     audioContext = null;
   }
 
-  audioStatus.textContent = "空闲";
+  sharedBrainwavePlayer?.stop?.();
+  updateBrainStatus();
 }
 
 async function playMode(mode) {
   stopAudio();
+  sharedBrainwavePlayer?.stop?.();
   audioContext = new window.AudioContext();
 
   const profile = {
@@ -247,8 +266,20 @@ document.querySelectorAll(".tone-button[data-mode]").forEach((button) => {
 
 document.querySelector("#stop-audio").addEventListener("click", stopAudio);
 volumeControl.addEventListener("input", () => {
+  if (sharedBrainwavePlayer?.getState?.().src) {
+    sharedBrainwavePlayer.setVolume(Number(volumeControl.value) / 100);
+  }
+
   const gainNode = audioNodes.find((node) => typeof node.gain !== "undefined");
   if (gainNode) {
     gainNode.gain.value = Number(volumeControl.value) / 1000;
   }
 });
+
+if (sharedBrainwavePlayer?.subscribe) {
+  sharedBrainwavePlayer.subscribe(() => {
+    updateBrainStatus();
+  });
+}
+
+updateBrainStatus();
