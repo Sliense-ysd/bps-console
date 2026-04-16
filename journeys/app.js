@@ -25,6 +25,54 @@ const journeySamples = window.JOURNEY_SAMPLES || {};
 const INITIAL_VISIBLE_COUNT = 2;
 const LOAD_MORE_COUNT = 2;
 
+const investigationConfigBySite = {
+  musicmake: {
+    links: [
+      { label: "用户后台", href: "https://musicmake.ai/admin/users" },
+      { label: "音乐作品库", href: "https://musicmake.ai/admin/music-works" },
+      { label: "音乐订单", href: "https://musicmake.ai/admin/music-orders" },
+      { label: "分析仪表盘", href: "https://musicmake.ai/admin/analytics-dashboard" },
+      { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
+    ],
+  },
+  songunique: {
+    links: [
+      { label: "作品追踪页", href: "https://songunique.com/track" },
+      { label: "Create", href: "https://songunique.com/create" },
+      { label: "结账页", href: "https://songunique.com/complete-order" },
+      { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
+    ],
+    clarityCandidates: [
+      {
+        id: "t17ka6/7bt6c7",
+        label: "支付失败候选录屏",
+        href: "https://clarity.microsoft.com/player/w3ujsk46ve/t17ka6/7bt6c7",
+        note: "create → complete-order，录屏里能看到 Payment failed 提示和重复支付点击。",
+      },
+      {
+        id: "c23jar/aiofoq",
+        label: "结账页长停留候选录屏",
+        href: "https://clarity.microsoft.com/player/w3ujsk46ve/c23jar/aiofoq",
+        note: "停留 2 分钟以上，看到 Proceed to Payment 和输入行为。",
+      },
+      {
+        id: "1m2igve/1v5th38",
+        label: "结账页短录屏",
+        href: "https://clarity.microsoft.com/player/w3ujsk46ve/1m2igve/1v5th38",
+        note: "只在 /complete-order 上停留 19 秒，适合快速核对附加项点击。",
+      },
+    ],
+  },
+  seedance20: {
+    links: [
+      { label: "站点首页", href: "https://seedance20.net/" },
+      { label: "聊天页", href: "https://seedance20.net/app/chat" },
+      { label: "生成页", href: "https://seedance20.net/app/generate" },
+      { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
+    ],
+  },
+};
+
 const searchInput = document.querySelector("#site-search");
 const siteList = document.querySelector("#site-list");
 const siteTotal = document.querySelector("#site-total");
@@ -203,6 +251,114 @@ function renderWebhookTrail(session) {
   `;
 }
 
+function buildLookupModel(siteId, session) {
+  const config = investigationConfigBySite[siteId] || { links: [] };
+  const lowerPaths = session.timeline.map((event) => event.path.toLowerCase());
+  const lowerNames = session.timeline.map((event) => event.name.toLowerCase());
+
+  const promptSummary = lowerNames.some((name) => name.startsWith("ts_form_step"))
+    ? "这条 session 经过多步表单填写流程，但 Umami 没记录具体文本；建议结合候选录屏看 Entered Text。"
+    : lowerPaths.some((path) => path.includes("lyrics") || path.includes("generate"))
+      ? "能定位到用户在哪个生成页或歌词工具页，但当前 Umami 样例没有保留原始 prompt 文本。"
+      : "当前没有看到可直接还原 prompt 的字段。";
+
+  const creditsSummary = lowerNames.some((name) => name.includes("credit"))
+    ? "这条路径里出现过积分相关动作。"
+    : lowerPaths.some((path) => path.includes("/credits"))
+      ? "用户浏览过积分页，但当前样例没有看到实际积分消耗值。"
+      : "当前样例里没有明显的积分消费字段。";
+
+  const queryHints = [
+    session.id,
+    session.country,
+    session.browser,
+    session.firstSeen,
+    session.lastSeen,
+    session.timeline[0]?.path,
+  ].filter(Boolean);
+
+  return {
+    email: session.email || null,
+    promptSummary,
+    creditsSummary,
+    queryHints,
+    links: config.links,
+    clarityCandidates: config.clarityCandidates || [],
+  };
+}
+
+function renderLookupPanel(siteId, session) {
+  const lookup = buildLookupModel(siteId, session);
+
+  return `
+    <section class="detail-subcard">
+      <div class="card-head">
+        <h3>调查入口</h3>
+        <span>把用户、作品、支付和录屏线索串起来</span>
+      </div>
+
+      <div class="lookup-grid">
+        ${
+          lookup.email
+            ? `
+              <div class="lookup-panel">
+                <span>邮箱</span>
+                <strong>${escapeHtml(lookup.email)}</strong>
+              </div>
+            `
+            : ""
+        }
+        <div class="lookup-panel">
+          <span>积分情况</span>
+          <strong>${escapeHtml(lookup.creditsSummary)}</strong>
+        </div>
+        <div class="lookup-panel">
+          <span>提示词线索</span>
+          <strong>${escapeHtml(lookup.promptSummary)}</strong>
+        </div>
+        <div class="lookup-panel">
+          <span>建议搜索键</span>
+          <strong>${escapeHtml(lookup.queryHints.join(" · "))}</strong>
+        </div>
+      </div>
+
+      <div class="lookup-link-row">
+        ${lookup.links
+          .map(
+            (link) => `
+              <a class="lookup-link-button" href="${link.href}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>
+            `,
+          )
+          .join("")}
+      </div>
+
+      ${
+        lookup.clarityCandidates.length > 0
+          ? `
+            <div class="clarity-candidates">
+              ${lookup.clarityCandidates
+                .map(
+                  (candidate) => `
+                    <a class="clarity-card" href="${candidate.href}" target="_blank" rel="noreferrer">
+                      <span class="tag-code">${escapeHtml(candidate.id)}</span>
+                      <strong>${escapeHtml(candidate.label)}</strong>
+                      <p>${escapeHtml(candidate.note)}</p>
+                    </a>
+                  `,
+                )
+                .join("")}
+            </div>
+          `
+          : `
+            <div class="detail-note detail-note-muted">
+              当前没有直接匹配到录屏 id。建议带着上面的搜索键去 Clarity 手动筛选。
+            </div>
+          `
+      }
+    </section>
+  `;
+}
+
 function renderSelectedSession(session) {
   return `
     <section class="detail-card selected-session-card">
@@ -260,6 +416,8 @@ function renderSelectedSession(session) {
         </div>
         ${renderWebhookTrail(session)}
       </section>
+
+      ${renderLookupPanel(activeSiteId, session)}
 
       <section class="detail-subcard">
         <div class="card-head">
