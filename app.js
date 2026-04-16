@@ -1,5 +1,5 @@
 const modules = [
-  { id: "brain", title: "脑波实验室", meta: "内置", category: "专注", status: "live", tags: ["脑波", "专注", "音频"], href: "#brain-lab" },
+  { id: "brain", title: "脑波实验室", meta: "29条音轨", category: "专注", status: "live", tags: ["脑波", "专注", "音频"], href: "/brain-waves/" },
   { id: "builderpulse", title: "BuilderPulse", meta: "日报", category: "信号", status: "live", tags: ["新闻", "信号", "市场"], href: "https://github.com/BuilderPulse/BuilderPulse" },
   { id: "news", title: "新闻入口", meta: "预留", category: "信号", status: "planned", tags: ["新闻", "情报"], href: "#" },
   { id: "buildpost", title: "Build Post", meta: "预留", category: "信号", status: "planned", tags: ["帖子", "build"], href: "#" },
