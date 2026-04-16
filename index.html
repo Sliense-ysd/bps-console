@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BPS Console</title>
+    <meta
+      name="description"
+      content="BPS Console: a personal operating dashboard for news, signals, analytics, revenue, monitoring, and brainwave focus."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="rail">
+        <div class="brand">
+          <p class="eyebrow">BPS</p>
+          <h1>Console</h1>
+          <p class="subtle">
+            A single operating surface for focus, signals, traffic, revenue, and
+            private tooling.
+          </p>
+        </div>
+
+        <nav class="rail-nav">
+          <a href="#overview">Overview</a>
+          <a href="#workbench">Workbench</a>
+          <a href="#brain-lab">Brain Lab</a>
+          <a href="#blueprint">Blueprint</a>
+        </nav>
+
+        <section class="panel quick-notes">
+          <p class="eyebrow">How to use</p>
+          <ol>
+            <li>Start with one context: focus, growth, ops, or research.</li>
+            <li>Search or pin the entrances you touch every day.</li>
+            <li>Use this shell as the parent home for future tools and tasks.</li>
+          </ol>
+        </section>
+      </aside>
+
+      <main class="main">
+        <section id="overview" class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Operating System</p>
+            <h2>One dashboard for the things you check every day.</h2>
+            <p class="hero-text">
+              This first version is a portal shell. It gives you one place to
+              enter brainwave audio, news, BuilderPulse signals, analytics,
+              monitoring, keyword work, revenue views, and future automations.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-action" href="#workbench">Open modules</a>
+              <button id="show-pinned" class="secondary-action" type="button">
+                Show pinned only
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-side panel">
+            <p class="eyebrow">Phase 1</p>
+            <ul class="signal-list">
+              <li>Portal shell with searchable entries</li>
+              <li>Pin frequently used entrances</li>
+              <li>Built-in brainwave focus module</li>
+              <li>Ready for future auth and scheduled task controls</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="metrics-grid">
+          <article class="metric-card">
+            <p class="eyebrow">Current mode</p>
+            <strong>Portal shell</strong>
+            <span>Live now</span>
+          </article>
+          <article class="metric-card">
+            <p class="eyebrow">Linked modules</p>
+            <strong id="module-count">0</strong>
+            <span>Entrances configured</span>
+          </article>
+          <article class="metric-card">
+            <p class="eyebrow">Pinned</p>
+            <strong id="pinned-count">0</strong>
+            <span>Saved in this browser</span>
+          </article>
+          <article class="metric-card">
+            <p class="eyebrow">Next upgrade</p>
+            <strong>Auth + tasks</strong>
+            <span>Recommended</span>
+          </article>
+        </section>
+
+        <section id="workbench" class="workbench">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Workbench</p>
+              <h3>Your entrances</h3>
+            </div>
+            <div class="toolbar">
+              <input
+                id="search"
+                type="search"
+                placeholder="Search modules, tags, or intent"
+              />
+              <select id="category-filter">
+                <option value="all">All categories</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="card-grid" class="card-grid"></div>
+        </section>
+
+        <section id="brain-lab" class="brain-lab panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Brain Lab</p>
+              <h3>Focus audio built into the portal</h3>
+            </div>
+            <p class="section-note">
+              This uses the browser Web Audio API. Click one mode, then stop
+              when finished.
+            </p>
+          </div>
+
+          <div class="brain-grid">
+            <button class="tone-button" data-mode="alpha">
+              <span>Alpha</span>
+              <small>Creative calm</small>
+            </button>
+            <button class="tone-button" data-mode="beta">
+              <span>Beta</span>
+              <small>Sharper work</small>
+            </button>
+            <button class="tone-button" data-mode="theta">
+              <span>Theta</span>
+              <small>Slow reset</small>
+            </button>
+            <button class="tone-button danger" id="stop-audio" type="button">
+              <span>Stop</span>
+              <small>Silence output</small>
+            </button>
+          </div>
+
+          <div class="volume-wrap">
+            <label for="volume">Volume</label>
+            <input id="volume" type="range" min="0" max="100" value="28" />
+            <span id="audio-status">Idle</span>
+          </div>
+        </section>
+
+        <section id="blueprint" class="blueprint">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Blueprint</p>
+              <h3>Recommended next engineering layers</h3>
+            </div>
+          </div>
+          <div class="blueprint-grid">
+            <article class="panel">
+              <h4>1. Access control</h4>
+              <p>
+                Add auth before exposing revenue, operations, and admin links as
+                first-class routes.
+              </p>
+            </article>
+            <article class="panel">
+              <h4>2. Task runner</h4>
+              <p>
+                Add schedule controls and task execution history so cron work can
+                be triggered and observed here.
+              </p>
+            </article>
+            <article class="panel">
+              <h4>3. Embedded data</h4>
+              <p>
+                Replace placeholder cards with real APIs for traffic, keyword
+                demand, revenue, alerts, and user journey diagnostics.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
