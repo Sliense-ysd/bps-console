@@ -6,179 +6,60 @@
     <title>BPS 总控台</title>
     <meta
       name="description"
-      content="BPS 总控台：把专注、信号、分析、收入、监控和个人工具收进同一个入口。"
+      content="BPS 总控台：高密度入口页，把专注、信号、分析、收入、监控和个人工具收口到一个页面。"
     />
     <meta name="robots" content="noindex,nofollow" />
     <link rel="icon" href="https://brain.seekorigin.ai/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="https://brain.seekorigin.ai/styles.css" />
   </head>
   <body>
-    <div class="layout">
-      <aside class="rail">
-        <div class="brand">
-          <p class="eyebrow">BPS</p>
-          <h1>总控台</h1>
-          <p class="subtle">
-            把专注、信号、流量、收入和私人工具收进同一个操作界面。
-          </p>
+    <main class="shell">
+      <header class="topbar">
+        <div class="title-wrap">
+          <h1>BPS 总控台</h1>
+          <p>高密度入口页，只做跳转，不做展开说明。</p>
         </div>
 
-        <nav class="rail-nav">
-          <a href="#overview">总览</a>
-          <a href="#workbench">工作台</a>
-          <a href="#brain-lab">脑波实验室</a>
-          <a href="#blueprint">后续规划</a>
-        </nav>
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="搜索入口、分类、标签" />
+          <button id="show-pinned" type="button">只看置顶</button>
+        </div>
+      </header>
 
-        <section class="panel quick-notes">
-          <p class="eyebrow">使用方式</p>
-          <ol>
-            <li>先选一个上下文：专注、增长、运营或研究。</li>
-            <li>把你每天要进的入口搜出来并置顶。</li>
-            <li>后续所有工具、任务和监控都往这里统一收口。</li>
-          </ol>
-        </section>
-      </aside>
-
-      <main class="main">
-        <section id="overview" class="hero">
-          <div class="hero-copy">
-            <p class="eyebrow">操作系统</p>
-            <h2>把你每天会看的东西，收进一个总控台。</h2>
-            <p class="hero-text">
-              这一版先是入口层外壳。你可以从这里进入脑波音频、新闻、BuilderPulse、
-              分析、监控、找词、收入视图，以及后续的自动化任务。
-            </p>
-            <div class="hero-actions">
-              <a class="primary-action" href="#workbench">打开模块</a>
-              <button id="show-pinned" class="secondary-action" type="button">
-                只看置顶
-              </button>
-            </div>
-          </div>
-
-          <div class="hero-side panel">
-            <p class="eyebrow">第一阶段</p>
-            <ul class="signal-list">
-              <li>可搜索的总入口外壳</li>
-              <li>支持常用入口置顶</li>
-              <li>内置脑波专注模块</li>
-              <li>为后续登录和定时任务控制预留结构</li>
-            </ul>
-          </div>
-        </section>
-
-        <section class="metrics-grid">
-          <article class="metric-card">
-            <p class="eyebrow">当前状态</p>
-            <strong>入口外壳</strong>
-            <span>已上线</span>
-          </article>
-          <article class="metric-card">
-            <p class="eyebrow">模块数量</p>
-            <strong id="module-count">0</strong>
-            <span>已配置入口</span>
-          </article>
-          <article class="metric-card">
-            <p class="eyebrow">置顶数量</p>
-            <strong id="pinned-count">0</strong>
-            <span>保存在当前浏览器</span>
-          </article>
-          <article class="metric-card">
-            <p class="eyebrow">下一步升级</p>
-            <strong>登录 + 任务</strong>
-            <span>优先推荐</span>
-          </article>
-        </section>
-
-        <section id="workbench" class="workbench">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">工作台</p>
-              <h3>你的入口集合</h3>
-            </div>
-            <div class="toolbar">
-              <input
-                id="search"
-                type="search"
-                placeholder="搜索模块、标签或意图"
-              />
-              <select id="category-filter">
-                <option value="all">全部分类</option>
-              </select>
-            </div>
-          </div>
-
-          <div id="card-grid" class="card-grid"></div>
-        </section>
-
-        <section id="brain-lab" class="brain-lab panel">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">脑波实验室</p>
-              <h3>把专注音频直接内置到总控台里</h3>
-            </div>
-            <p class="section-note">
-              这里用的是浏览器 Web Audio API。点一个模式开始，结束时点停止即可。
-            </p>
-          </div>
-
-          <div class="brain-grid">
-            <button class="tone-button" data-mode="alpha">
-              <span>Alpha</span>
-              <small>创作放松</small>
-            </button>
-            <button class="tone-button" data-mode="beta">
-              <span>Beta</span>
-              <small>更专注地工作</small>
-            </button>
-            <button class="tone-button" data-mode="theta">
-              <span>Theta</span>
-              <small>缓慢重置</small>
-            </button>
-            <button class="tone-button danger" id="stop-audio" type="button">
-              <span>停止</span>
-              <small>关闭声音</small>
-            </button>
-          </div>
-
-          <div class="volume-wrap">
-            <label for="volume">音量</label>
+      <section id="brain-lab" class="brain-strip">
+        <div class="brain-title">
+          <strong>脑波音频</strong>
+          <span id="audio-status">空闲</span>
+        </div>
+        <div class="brain-actions">
+          <button class="tone-button" data-mode="alpha" type="button">Alpha</button>
+          <button class="tone-button" data-mode="beta" type="button">Beta</button>
+          <button class="tone-button" data-mode="theta" type="button">Theta</button>
+          <button class="tone-button tone-stop" id="stop-audio" type="button">停止</button>
+          <label class="volume-row" for="volume">
+            <span>音量</span>
             <input id="volume" type="range" min="0" max="100" value="28" />
-            <span id="audio-status">空闲</span>
-          </div>
-        </section>
+          </label>
+        </div>
+      </section>
 
-        <section id="blueprint" class="blueprint">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">后续规划</p>
-              <h3>推荐优先补上的工程层</h3>
-            </div>
-          </div>
-          <div class="blueprint-grid">
-            <article class="panel">
-              <h4>1. 访问控制</h4>
-              <p>
-                在把收入、运营和后台入口变成正式页面之前，先加登录保护。
-              </p>
-            </article>
-            <article class="panel">
-              <h4>2. 任务中心</h4>
-              <p>
-                把定时任务控制和执行历史收进来，这样 cron 和监控都能在这里操作。
-              </p>
-            </article>
-            <article class="panel">
-              <h4>3. 嵌入真实数据</h4>
-              <p>
-                用真实 API 替换占位卡片，把流量、找词、收入、告警和用户路径接进来。
-              </p>
-            </article>
-          </div>
-        </section>
-      </main>
-    </div>
+      <section class="summary-row">
+        <div class="summary-box">
+          <span>总入口数</span>
+          <strong id="module-count">0</strong>
+        </div>
+        <div class="summary-box">
+          <span>已置顶</span>
+          <strong id="pinned-count">0</strong>
+        </div>
+        <div class="summary-box">
+          <span>说明</span>
+          <strong>按钮越多越好</strong>
+        </div>
+      </section>
+
+      <div id="sections" class="sections"></div>
+    </main>
 
     <script src="https://brain.seekorigin.ai/app.js" defer></script>
   </body>
