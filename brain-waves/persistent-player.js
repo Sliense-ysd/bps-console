@@ -308,10 +308,22 @@
   }
 
   function syncUi() {
+    const statusLabel = document.querySelector("#audio-status");
+    const volumeSlider = document.querySelector("#volume");
     if (!dock) return;
 
     const snapshot = getState();
     const hasTrack = Boolean(snapshot.src);
+
+    if (statusLabel) {
+      statusLabel.textContent = hasTrack
+        ? `${snapshot.isPlaying ? "继续播放" : "已暂停"}：${snapshot.title || "脑波音频"}`
+        : "空闲";
+    }
+
+    if (volumeSlider && typeof snapshot.volume === "number") {
+      volumeSlider.value = String(Math.round(snapshot.volume * 100));
+    }
 
     dock.classList.toggle("visible", hasTrack);
     if (!hasTrack) {
