@@ -29,7 +29,7 @@ const tracks = [
 
   { id: "gamma-40", title: "40Hz Gamma 专注冥想", band: "Gamma", style: "高认知", duration: "1小时", note: "MIT GENUS", src: "https://file.musicmake.ai/brain-waves/audio/13-高认知-Gamma-40Hz-专注冥想-1h.mp3" },
   { id: "gamma-40-short", title: "40Hz Gamma 冥想音乐", band: "Gamma", style: "高认知", duration: "10分钟", note: "短版", src: "https://file.musicmake.ai/brain-waves/audio/Gamma-40Hz-meditation-10min.mp3" },
-  { id: "gamma-boost", title: "激活大脑 100%", band: "Gamma", style: "高认知", duration: "5.5小时", note: "超长版", src: "https://file.musicmake.ai/brain-waves/audio/08-高认知-Gamma-激活大脑100%-5.5h.mp3" },
+  { id: "gamma-boost", title: "激活大脑 100%", band: "Gamma", style: "高认知", duration: "5.5小时", note: "超长版", src: "https://file.musicmake.ai/brain-waves/audio/08-高认知-Gamma-激活大脑100%25-5.5h.mp3" },
 
   { id: "solfeggio-528", title: "528Hz 自愈抗焦虑冥想", band: "Solfeggio", style: "疗愈", duration: "约25分钟", note: "528Hz", src: "https://file.musicmake.ai/brain-waves/audio/09-自愈-528Hz-抗焦虑冥想.mp3" },
   { id: "solfeggio-639", title: "639Hz 心轮疗愈频率", band: "Solfeggio", style: "疗愈", duration: "约30分钟", note: "639Hz", src: "https://file.musicmake.ai/brain-waves/audio/10-疗愈-639Hz-Solfeggio-心轮频率.mp3" },
