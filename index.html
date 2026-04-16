@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BPS Console</title>
+    <title>BPS 总控台</title>
     <meta
       name="description"
-      content="BPS Console: a personal operating dashboard for news, signals, analytics, revenue, monitoring, and brainwave focus."
+      content="BPS 总控台：把专注、信号、分析、收入、监控和个人工具收进同一个入口。"
     />
     <meta name="robots" content="noindex,nofollow" />
     <link rel="icon" href="https://brain.seekorigin.ai/favicon.svg" type="image/svg+xml" />
@@ -17,26 +17,25 @@
       <aside class="rail">
         <div class="brand">
           <p class="eyebrow">BPS</p>
-          <h1>Console</h1>
+          <h1>总控台</h1>
           <p class="subtle">
-            A single operating surface for focus, signals, traffic, revenue, and
-            private tooling.
+            把专注、信号、流量、收入和私人工具收进同一个操作界面。
           </p>
         </div>
 
         <nav class="rail-nav">
-          <a href="#overview">Overview</a>
-          <a href="#workbench">Workbench</a>
-          <a href="#brain-lab">Brain Lab</a>
-          <a href="#blueprint">Blueprint</a>
+          <a href="#overview">总览</a>
+          <a href="#workbench">工作台</a>
+          <a href="#brain-lab">脑波实验室</a>
+          <a href="#blueprint">后续规划</a>
         </nav>
 
         <section class="panel quick-notes">
-          <p class="eyebrow">How to use</p>
+          <p class="eyebrow">使用方式</p>
           <ol>
-            <li>Start with one context: focus, growth, ops, or research.</li>
-            <li>Search or pin the entrances you touch every day.</li>
-            <li>Use this shell as the parent home for future tools and tasks.</li>
+            <li>先选一个上下文：专注、增长、运营或研究。</li>
+            <li>把你每天要进的入口搜出来并置顶。</li>
+            <li>后续所有工具、任务和监控都往这里统一收口。</li>
           </ol>
         </section>
       </aside>
@@ -44,69 +43,68 @@
       <main class="main">
         <section id="overview" class="hero">
           <div class="hero-copy">
-            <p class="eyebrow">Operating System</p>
-            <h2>One dashboard for the things you check every day.</h2>
+            <p class="eyebrow">操作系统</p>
+            <h2>把你每天会看的东西，收进一个总控台。</h2>
             <p class="hero-text">
-              This first version is a portal shell. It gives you one place to
-              enter brainwave audio, news, BuilderPulse signals, analytics,
-              monitoring, keyword work, revenue views, and future automations.
+              这一版先是入口层外壳。你可以从这里进入脑波音频、新闻、BuilderPulse、
+              分析、监控、找词、收入视图，以及后续的自动化任务。
             </p>
             <div class="hero-actions">
-              <a class="primary-action" href="#workbench">Open modules</a>
+              <a class="primary-action" href="#workbench">打开模块</a>
               <button id="show-pinned" class="secondary-action" type="button">
-                Show pinned only
+                只看置顶
               </button>
             </div>
           </div>
 
           <div class="hero-side panel">
-            <p class="eyebrow">Phase 1</p>
+            <p class="eyebrow">第一阶段</p>
             <ul class="signal-list">
-              <li>Portal shell with searchable entries</li>
-              <li>Pin frequently used entrances</li>
-              <li>Built-in brainwave focus module</li>
-              <li>Ready for future auth and scheduled task controls</li>
+              <li>可搜索的总入口外壳</li>
+              <li>支持常用入口置顶</li>
+              <li>内置脑波专注模块</li>
+              <li>为后续登录和定时任务控制预留结构</li>
             </ul>
           </div>
         </section>
 
         <section class="metrics-grid">
           <article class="metric-card">
-            <p class="eyebrow">Current mode</p>
-            <strong>Portal shell</strong>
-            <span>Live now</span>
+            <p class="eyebrow">当前状态</p>
+            <strong>入口外壳</strong>
+            <span>已上线</span>
           </article>
           <article class="metric-card">
-            <p class="eyebrow">Linked modules</p>
+            <p class="eyebrow">模块数量</p>
             <strong id="module-count">0</strong>
-            <span>Entrances configured</span>
+            <span>已配置入口</span>
           </article>
           <article class="metric-card">
-            <p class="eyebrow">Pinned</p>
+            <p class="eyebrow">置顶数量</p>
             <strong id="pinned-count">0</strong>
-            <span>Saved in this browser</span>
+            <span>保存在当前浏览器</span>
           </article>
           <article class="metric-card">
-            <p class="eyebrow">Next upgrade</p>
-            <strong>Auth + tasks</strong>
-            <span>Recommended</span>
+            <p class="eyebrow">下一步升级</p>
+            <strong>登录 + 任务</strong>
+            <span>优先推荐</span>
           </article>
         </section>
 
         <section id="workbench" class="workbench">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Workbench</p>
-              <h3>Your entrances</h3>
+              <p class="eyebrow">工作台</p>
+              <h3>你的入口集合</h3>
             </div>
             <div class="toolbar">
               <input
                 id="search"
                 type="search"
-                placeholder="Search modules, tags, or intent"
+                placeholder="搜索模块、标签或意图"
               />
               <select id="category-filter">
-                <option value="all">All categories</option>
+                <option value="all">全部分类</option>
               </select>
             </div>
           </div>
@@ -117,68 +115,64 @@
         <section id="brain-lab" class="brain-lab panel">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Brain Lab</p>
-              <h3>Focus audio built into the portal</h3>
+              <p class="eyebrow">脑波实验室</p>
+              <h3>把专注音频直接内置到总控台里</h3>
             </div>
             <p class="section-note">
-              This uses the browser Web Audio API. Click one mode, then stop
-              when finished.
+              这里用的是浏览器 Web Audio API。点一个模式开始，结束时点停止即可。
             </p>
           </div>
 
           <div class="brain-grid">
             <button class="tone-button" data-mode="alpha">
               <span>Alpha</span>
-              <small>Creative calm</small>
+              <small>创作放松</small>
             </button>
             <button class="tone-button" data-mode="beta">
               <span>Beta</span>
-              <small>Sharper work</small>
+              <small>更专注地工作</small>
             </button>
             <button class="tone-button" data-mode="theta">
               <span>Theta</span>
-              <small>Slow reset</small>
+              <small>缓慢重置</small>
             </button>
             <button class="tone-button danger" id="stop-audio" type="button">
-              <span>Stop</span>
-              <small>Silence output</small>
+              <span>停止</span>
+              <small>关闭声音</small>
             </button>
           </div>
 
           <div class="volume-wrap">
-            <label for="volume">Volume</label>
+            <label for="volume">音量</label>
             <input id="volume" type="range" min="0" max="100" value="28" />
-            <span id="audio-status">Idle</span>
+            <span id="audio-status">空闲</span>
           </div>
         </section>
 
         <section id="blueprint" class="blueprint">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Blueprint</p>
-              <h3>Recommended next engineering layers</h3>
+              <p class="eyebrow">后续规划</p>
+              <h3>推荐优先补上的工程层</h3>
             </div>
           </div>
           <div class="blueprint-grid">
             <article class="panel">
-              <h4>1. Access control</h4>
+              <h4>1. 访问控制</h4>
               <p>
-                Add auth before exposing revenue, operations, and admin links as
-                first-class routes.
+                在把收入、运营和后台入口变成正式页面之前，先加登录保护。
               </p>
             </article>
             <article class="panel">
-              <h4>2. Task runner</h4>
+              <h4>2. 任务中心</h4>
               <p>
-                Add schedule controls and task execution history so cron work can
-                be triggered and observed here.
+                把定时任务控制和执行历史收进来，这样 cron 和监控都能在这里操作。
               </p>
             </article>
             <article class="panel">
-              <h4>3. Embedded data</h4>
+              <h4>3. 嵌入真实数据</h4>
               <p>
-                Replace placeholder cards with real APIs for traffic, keyword
-                demand, revenue, alerts, and user journey diagnostics.
+                用真实 API 替换占位卡片，把流量、找词、收入、告警和用户路径接进来。
               </p>
             </article>
           </div>

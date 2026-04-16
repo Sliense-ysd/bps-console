@@ -1,82 +1,82 @@
 const modules = [
   {
     id: "brain",
-    title: "Brain Lab",
-    description: "Enter a built-in focus audio module without leaving the console.",
-    category: "focus",
+    title: "脑波实验室",
+    description: "不离开总控台，直接进入内置专注音频模块。",
+    category: "专注",
     status: "live",
-    tags: ["brainwaves", "focus", "audio"],
-    actionLabel: "Open module",
+    tags: ["脑波", "专注", "音频"],
+    actionLabel: "打开模块",
     href: "#brain-lab",
   },
   {
     id: "builderpulse",
     title: "BuilderPulse",
-    description: "Scan daily signals, trending repos, and product angles worth building.",
-    category: "research",
+    description: "查看每日信号、热门仓库和值得做的产品方向。",
+    category: "研究",
     status: "live",
-    tags: ["news", "signals", "market"],
-    actionLabel: "Open report source",
+    tags: ["新闻", "信号", "市场"],
+    actionLabel: "打开报告源",
     href: "https://github.com/BuilderPulse/BuilderPulse",
   },
   {
     id: "analytics",
-    title: "Traffic Analytics",
-    description: "Jump into the analytics stack to inspect traffic and behavioral signals.",
-    category: "analytics",
+    title: "流量分析",
+    description: "进入分析栈查看流量和行为信号。",
+    category: "分析",
     status: "private",
-    tags: ["umami", "traffic", "journey"],
-    actionLabel: "Open analytics",
+    tags: ["umami", "流量", "路径"],
+    actionLabel: "打开分析",
     href: "https://analytics.seekorigin.ai",
   },
   {
     id: "monitoring",
-    title: "Monitoring",
-    description: "Open the deployment and runtime control plane for services and schedules.",
-    category: "ops",
+    title: "监控与部署",
+    description: "打开服务部署、运行时控制和定时任务面板。",
+    category: "运营",
     status: "private",
-    tags: ["dokploy", "deploy", "alerts"],
-    actionLabel: "Open ops panel",
+    tags: ["dokploy", "部署", "告警"],
+    actionLabel: "打开运营面板",
     href: "http://31.97.143.166:3000/dashboard/monitoring",
   },
   {
     id: "schedules",
-    title: "Schedules",
-    description: "Use the future task center for cron jobs, polling tasks, and report runners.",
-    category: "ops",
+    title: "定时任务",
+    description: "后续在这里管理 cron、轮询任务和报告任务。",
+    category: "运营",
     status: "planned",
-    tags: ["cron", "tasks", "automation"],
-    actionLabel: "Planned",
+    tags: ["cron", "任务", "自动化"],
+    actionLabel: "待接入",
     href: "#blueprint",
   },
   {
     id: "keywords",
-    title: "Keyword Deck",
-    description: "A future surface for keyword mining, topic expansion, and buy-intent tracking.",
-    category: "growth",
+    title: "找词面板",
+    description: "后续在这里做找词、扩词和购买意图追踪。",
+    category: "增长",
     status: "planned",
-    tags: ["keywords", "research", "buy intent"],
-    actionLabel: "Planned",
+    tags: ["关键词", "研究", "购买意图"],
+    actionLabel: "待接入",
     href: "#blueprint",
   },
   {
     id: "revenue",
-    title: "Revenue View",
-    description: "A future board for income, subscriptions, and payment-side health signals.",
-    category: "finance",
+    title: "收入看板",
+    description: "后续在这里看收入、订阅和支付侧健康度。",
+    category: "收入",
     status: "planned",
-    tags: ["revenue", "mrr", "payments"],
-    actionLabel: "Planned",
+    tags: ["收入", "MRR", "支付"],
+    actionLabel: "待接入",
     href: "#blueprint",
   },
   {
     id: "journey",
-    title: "User Journey",
-    description: "A future workspace for single-user path reconstruction and conversion drop-offs.",
-    category: "analytics",
+    title: "用户路径",
+    description: "后续在这里还原单用户路径和转化流失点。",
+    category: "分析",
     status: "planned",
-    tags: ["journey", "funnel", "sessions"],
-    actionLabel: "Planned",
+    tags: ["路径", "漏斗", "会话"],
+    actionLabel: "待接入",
     href: "#blueprint",
   },
 ];
@@ -95,6 +95,11 @@ const pinned = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
 let pinnedOnly = false;
 let audioContext = null;
 let audioNodes = [];
+const statusLabels = {
+  live: "已接入",
+  private: "私有",
+  planned: "规划中",
+};
 
 function persistPins() {
   localStorage.setItem(storageKey, JSON.stringify([...pinned]));
@@ -106,7 +111,7 @@ function buildFilters() {
   categories.forEach((category) => {
     const option = document.createElement("option");
     option.value = category;
-    option.textContent = category[0].toUpperCase() + category.slice(1);
+    option.textContent = category;
     categoryFilter.appendChild(option);
   });
 }
@@ -131,7 +136,7 @@ function createCard(module) {
         <p class="eyebrow">${module.category}</p>
         <h4>${module.title}</h4>
       </div>
-      <span class="status-badge ${module.status}">${module.status}</span>
+      <span class="status-badge ${module.status}">${statusLabels[module.status] || module.status}</span>
     </header>
     <p>${module.description}</p>
     <div class="tag-row">
@@ -140,7 +145,7 @@ function createCard(module) {
     <div class="card-footer">
       <a class="${actionClass}" href="${module.href}" ${linkAttrs}>${module.actionLabel}</a>
       <button class="pin-button ${isPinned ? "active" : ""}" data-id="${module.id}" type="button">
-        ${isPinned ? "Pinned" : "Pin"}
+        ${isPinned ? "已置顶" : "置顶"}
       </button>
     </div>
   `;
@@ -208,7 +213,7 @@ function stopAudio() {
     audioContext = null;
   }
 
-  audioStatus.textContent = "Idle";
+  audioStatus.textContent = "空闲";
 }
 
 async function playMode(mode) {
@@ -217,9 +222,9 @@ async function playMode(mode) {
   audioContext = new window.AudioContext();
 
   const profile = {
-    alpha: { left: 210, right: 220, label: "Alpha creative calm" },
-    beta: { left: 160, right: 174, label: "Beta sharper work" },
-    theta: { left: 120, right: 126, label: "Theta slow reset" },
+    alpha: { left: 210, right: 220, label: "Alpha 创作放松" },
+    beta: { left: 160, right: 174, label: "Beta 更专注地工作" },
+    theta: { left: 120, right: 126, label: "Theta 缓慢重置" },
   }[mode];
 
   const gain = audioContext.createGain();
@@ -255,7 +260,7 @@ categoryFilter.addEventListener("change", renderCards);
 
 showPinnedButton.addEventListener("click", () => {
   pinnedOnly = !pinnedOnly;
-  showPinnedButton.textContent = pinnedOnly ? "Show all modules" : "Show pinned only";
+  showPinnedButton.textContent = pinnedOnly ? "显示全部模块" : "只看置顶";
   renderCards();
 });
 
