@@ -528,6 +528,34 @@ a {
   cursor: pointer;
 }
 
+.task-live-button {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--accent);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.task-live-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.task-feedback {
+  min-height: 18px;
+  font-size: 12px;
+}
+
+.task-feedback.success {
+  color: #1d7a41;
+}
+
+.task-feedback.warn {
+  color: var(--warn);
+}
+
 .control-explainer p {
   margin: 0;
   color: var(--muted);
