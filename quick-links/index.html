@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>常用入口</title>
+    <meta
+      name="description"
+      content="BPS 常用入口页：把信号、分析、运维、增长、收入和个人常用链接收拢到一个可以搜索的页面。"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="detail-shell">
+      <header class="detail-header">
+        <div>
+          <a class="back-link" href="/">← 返回总控台</a>
+          <h1>常用入口</h1>
+          <p>把原来还没落地的泛入口先补成可搜索的快捷页。你从首页点进来之后，可以直接按分区去不同系统。</p>
+        </div>
+        <div class="detail-stats">
+          <span id="quick-link-count">0 个入口</span>
+          <span id="quick-section-count">0 个分区</span>
+        </div>
+      </header>
+
+      <section class="detail-toolbar">
+        <input id="quick-search" type="search" placeholder="搜索入口、系统、用途" />
+        <div class="helper-copy">首页里原来那些“新闻入口 / 广告入口 / 工作区管理”之类的按钮，现在都会汇到这里。</div>
+      </section>
+
+      <div id="quick-sections" class="tag-groups"></div>
+    </main>
+
+    <script src="/quick-links/app.js" defer></script>
+  </body>
+</html>

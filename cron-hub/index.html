@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cron Hub</title>
+    <meta
+      name="description"
+      content="BPS Cron Hub：把 cron-hub 里的全部定时监控任务收进一个可搜索的看板。"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="detail-shell">
+      <header class="detail-header">
+        <div>
+          <a class="back-link" href="/">← 返回总控台</a>
+          <h1>Cron Hub</h1>
+          <p>把 cron-hub 注册表里的高频任务、日频任务和事件驱动任务都整理到站内，方便你从总控台直接跳到对应 workflow。</p>
+        </div>
+        <div class="detail-stats">
+          <span id="cron-task-count">0 个任务</span>
+          <span id="cron-section-count">0 个分组</span>
+        </div>
+      </header>
+
+      <section class="detail-toolbar">
+        <input id="cron-search" type="search" placeholder="搜索任务名、时间、repo、用途" />
+        <div class="helper-copy">数据基于 `cron-hub/registry.yml` 当前已登记任务整理。</div>
+      </section>
+
+      <div id="cron-sections" class="tag-groups"></div>
+    </main>
+
+    <script src="/cron-hub/app.js" defer></script>
+  </body>
+</html>

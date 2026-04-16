@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过期域名</title>
+    <meta
+      name="description"
+      content="BPS 过期域名页：收纳拍卖域名监控、域名工厂仓库、白名单准入文档和数据源入口。"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="detail-shell">
+      <header class="detail-header">
+        <div>
+          <a class="back-link" href="/">← 返回总控台</a>
+          <h1>过期域名</h1>
+          <p>把拍卖域名监控、域名工厂仓库、白名单准入文档和主要数据源都收在这里，方便你从总控台一跳直达。</p>
+        </div>
+        <div class="detail-stats">
+          <span id="domain-link-count">0 个入口</span>
+          <span id="domain-section-count">0 个分组</span>
+        </div>
+      </header>
+
+      <section class="detail-toolbar">
+        <input id="domain-search" type="search" placeholder="搜索 auction、whitelist、branch、source" />
+        <div class="helper-copy">这一页同时覆盖监控入口和工厂资产，不只是看拍卖结果。</div>
+      </section>
+
+      <div id="domain-sections" class="tag-groups"></div>
+    </main>
+
+    <script src="/expired-domains/app.js" defer></script>
+  </body>
+</html>
