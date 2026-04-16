@@ -18,7 +18,7 @@
         <div>
           <a class="back-link" href="../">← 返回总控台</a>
           <h1>用户路径</h1>
-          <p>这版先把真实 Umami 样例压成静态展示。先搜网站，再看右侧的路径图、诊断重点和代表性 session。</p>
+          <p>这版把真实 Umami 样例压成可读的 session 轨迹。先搜网站，再按 session 看用户停留、异常、支付分叉和更细事件。</p>
         </div>
         <div class="detail-stats">
           <span id="site-total">0 个站点</span>
@@ -28,7 +28,7 @@
 
       <section class="detail-toolbar">
         <input id="site-search" type="search" placeholder="搜索网站名、域名、关键词" />
-        <div class="helper-copy">绿色站点有真实路径样例，灰色站点先作为目录入口占位。</div>
+        <div class="helper-copy">绿色站点有真实 session 样例，灰色站点先作为目录入口占位。</div>
       </section>
 
       <div class="journey-layout">
@@ -44,6 +44,7 @@
       </div>
     </main>
 
+    <script src="/journeys/data.js" defer></script>
     <script src="/journeys/app.js" defer></script>
   </body>
 </html>

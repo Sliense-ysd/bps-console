@@ -687,6 +687,216 @@ a {
   color: var(--warn);
 }
 
+.detail-chip {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.detail-chip.info {
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--accent);
+}
+
+.detail-chip.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #1d7a41;
+}
+
+.detail-chip.warn {
+  background: rgba(183, 101, 22, 0.08);
+  color: var(--warn);
+}
+
+.selected-session-card,
+.detail-subcard {
+  display: grid;
+  gap: 12px;
+}
+
+.detail-subcard {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px;
+}
+
+.session-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.session-chip-row-compact {
+  margin-bottom: 8px;
+}
+
+.session-summary-grid,
+.session-metrics-grid,
+.session-detail-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.session-summary-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.session-metrics-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.session-detail-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 10px;
+}
+
+.summary-panel,
+.session-metric {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px;
+}
+
+.summary-panel span,
+.session-metric span,
+.session-detail-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.summary-panel strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.session-metric strong,
+.session-detail-grid strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.detail-note {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.detail-note-muted {
+  color: var(--muted);
+}
+
+.detail-note-warn {
+  color: var(--warn);
+}
+
+.timeline-list {
+  display: grid;
+  gap: 8px;
+}
+
+.timeline-gap {
+  margin-left: 84px;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.timeline-time {
+  color: var(--muted);
+  font-size: 12px;
+  padding-top: 4px;
+}
+
+.timeline-content {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px 12px;
+}
+
+.timeline-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.timeline-head strong {
+  font-size: 14px;
+}
+
+.timeline-head span {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+  word-break: break-all;
+}
+
+.timeline-detail {
+  margin: 8px 0 0;
+  padding: 8px;
+  border-radius: 10px;
+  background: #f7f3ed;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.session-library-head,
+.session-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.session-card-head {
+  margin-bottom: 10px;
+}
+
+.session-select-button,
+.load-more-button {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.session-card.active {
+  border-color: rgba(15, 118, 110, 0.35);
+  background: rgba(15, 118, 110, 0.04);
+}
+
+.session-details {
+  margin-top: 8px;
+}
+
+.session-details summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.session-trail-detailed {
+  margin-top: 10px;
+}
+
 .empty-state h2 {
   margin: 0 0 8px;
 }
@@ -702,6 +912,12 @@ a {
   }
 
   .journey-hero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .session-summary-grid,
+  .session-metrics-grid,
+  .session-detail-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -728,5 +944,23 @@ a {
 
   .tag-grid {
     grid-template-columns: 1fr;
+  }
+
+  .session-summary-grid,
+  .session-metrics-grid,
+  .session-detail-grid,
+  .timeline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-gap {
+    margin-left: 0;
+  }
+
+  .session-library-head,
+  .session-card-head,
+  .timeline-head {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
