@@ -477,6 +477,70 @@ a {
   font-size: 13px;
 }
 
+.task-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.task-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.task-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.task-card-head strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+.task-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-link-button,
+.task-command-button,
+.lookup-link-button {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.control-explainer p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.control-explainer code {
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: #f7f3ed;
+  color: var(--text);
+ }
+
 .journey-layout {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr);
@@ -883,6 +947,14 @@ a {
   background: rgba(15, 118, 110, 0.04);
 }
 
+.session-expanded {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
 .session-details {
   margin-top: 8px;
 }
@@ -1031,7 +1103,8 @@ a {
 
   .session-library-head,
   .session-card-head,
-  .timeline-head {
+  .timeline-head,
+  .task-card-head {
     flex-direction: column;
     align-items: stretch;
   }

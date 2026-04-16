@@ -29,17 +29,17 @@ const investigationConfigBySite = {
   musicmake: {
     links: [
       { label: "用户后台", href: "https://musicmake.ai/admin/users" },
-      { label: "音乐作品库", href: "https://musicmake.ai/admin/music-works" },
-      { label: "音乐订单", href: "https://musicmake.ai/admin/music-orders" },
+      { label: "作品管理", href: "https://musicmake.ai/admin/music-works" },
+      { label: "订单页", href: "https://musicmake.ai/admin/music-orders" },
       { label: "分析仪表盘", href: "https://musicmake.ai/admin/analytics-dashboard" },
       { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
     ],
   },
   songunique: {
     links: [
-      { label: "作品追踪页", href: "https://songunique.com/track" },
       { label: "Create", href: "https://songunique.com/create" },
       { label: "结账页", href: "https://songunique.com/complete-order" },
+      { label: "作品追踪", href: "https://songunique.com/track" },
       { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
     ],
     clarityCandidates: [
@@ -47,13 +47,13 @@ const investigationConfigBySite = {
         id: "t17ka6/7bt6c7",
         label: "支付失败候选录屏",
         href: "https://clarity.microsoft.com/player/w3ujsk46ve/t17ka6/7bt6c7",
-        note: "create → complete-order，录屏里能看到 Payment failed 提示和重复支付点击。",
+        note: "create → complete-order，录屏里能看到 Payment failed 和重复支付点击。",
       },
       {
         id: "c23jar/aiofoq",
         label: "结账页长停留候选录屏",
         href: "https://clarity.microsoft.com/player/w3ujsk46ve/c23jar/aiofoq",
-        note: "停留 2 分钟以上，看到 Proceed to Payment 和输入行为。",
+        note: "在结账页停留 2 分钟以上，能看到 Proceed to Payment 与输入行为。",
       },
       {
         id: "1m2igve/1v5th38",
@@ -82,7 +82,7 @@ const journeyMain = document.querySelector("#journey-main");
 
 let activeSiteId = siteRegistry.find((site) => site.status === "preview")?.id || siteRegistry[0].id;
 const visibleCountBySite = {};
-const selectedSessionBySite = {};
+const expandedSessionBySite = {};
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -121,13 +121,9 @@ function ensureSiteState(siteId) {
     visibleCountBySite[siteId] = Math.min(INITIAL_VISIBLE_COUNT, sample.sessions.length);
   }
 
-  if (!selectedSessionBySite[siteId] || !sample.sessions.some((session) => session.id === selectedSessionBySite[siteId])) {
-    selectedSessionBySite[siteId] = sample.sessions[0]?.id || null;
+  if (!(siteId in expandedSessionBySite)) {
+    expandedSessionBySite[siteId] = null;
   }
-}
-
-function getSelectedSession(sample) {
-  return sample.sessions.find((session) => session.id === selectedSessionBySite[activeSiteId]) || sample.sessions[0];
 }
 
 function renderSiteList() {
@@ -263,7 +259,7 @@ function buildLookupModel(siteId, session) {
       : "当前没有看到可直接还原 prompt 的字段。";
 
   const creditsSummary = lowerNames.some((name) => name.includes("credit"))
-    ? "这条路径里出现过积分相关动作。"
+    ? "这条路径里出现过积分相关动作，但当前没有精确的积分消耗值。"
     : lowerPaths.some((path) => path.includes("/credits"))
       ? "用户浏览过积分页，但当前样例没有看到实际积分消耗值。"
       : "当前样例里没有明显的积分消费字段。";
@@ -285,6 +281,19 @@ function buildLookupModel(siteId, session) {
     links: config.links,
     clarityCandidates: config.clarityCandidates || [],
   };
+}
+
+async function copyText(text, button) {
+  try {
+    await navigator.clipboard.writeText(text);
+    const original = button.textContent;
+    button.textContent = "已复制";
+    window.setTimeout(() => {
+      button.textContent = original;
+    }, 1200);
+  } catch {
+    button.textContent = "复制失败";
+  }
 }
 
 function renderLookupPanel(siteId, session) {
@@ -309,7 +318,7 @@ function renderLookupPanel(siteId, session) {
             : ""
         }
         <div class="lookup-panel">
-          <span>积分情况</span>
+          <span>积分线索</span>
           <strong>${escapeHtml(lookup.creditsSummary)}</strong>
         </div>
         <div class="lookup-panel">
@@ -330,6 +339,7 @@ function renderLookupPanel(siteId, session) {
             `,
           )
           .join("")}
+        <button class="lookup-link-button" data-copy="${escapeHtml(lookup.queryHints.join(" | "))}" type="button">复制搜索键</button>
       </div>
 
       ${
@@ -359,17 +369,9 @@ function renderLookupPanel(siteId, session) {
   `;
 }
 
-function renderSelectedSession(session) {
+function renderExpandedSession(session) {
   return `
-    <section class="detail-card selected-session-card">
-      <div class="card-head">
-        <div>
-          <h3>当前选中 session</h3>
-          <span>${escapeHtml(`${session.emoji} ${session.label} · session ${session.id}`)}</span>
-        </div>
-        <span>${escapeHtml(`${session.firstSeen} → ${session.lastSeen}`)}</span>
-      </div>
-
+    <div class="session-expanded">
       <div class="session-chip-row">
         ${session.tags.map((tag) => `<span class="${getToneClass(tag.tone)}">${escapeHtml(tag.label)}</span>`).join("")}
         <span class="detail-chip">${escapeHtml(`来源 ${session.source}`)}</span>
@@ -422,26 +424,26 @@ function renderSelectedSession(session) {
       <section class="detail-subcard">
         <div class="card-head">
           <h3>时间线</h3>
-          <span>每一步之间都显示停留时长</span>
+          <span>每一步都显示停留时长</span>
         </div>
         <div class="timeline-list">
           ${renderTimeline(session)}
         </div>
       </section>
-    </section>
+    </div>
   `;
 }
 
-function renderSessionCard(session, isActive) {
+function renderSessionCard(session, isExpanded) {
   return `
-    <article class="session-card ${isActive ? "active" : ""}">
+    <article class="session-card ${isExpanded ? "active" : ""}">
       <div class="session-card-head">
         <div>
           <strong>${escapeHtml(`${session.emoji} ${session.label}`)}</strong>
           <span>${escapeHtml(`${session.country} · ${session.browser} · ${session.device} · session ${session.id}`)}</span>
         </div>
         <button class="session-select-button" data-session-id="${session.id}" type="button">
-          ${isActive ? "当前查看中" : "查看详情"}
+          ${isExpanded ? "收起详情" : "查看详情"}
         </button>
       </div>
 
@@ -472,23 +474,11 @@ function renderSessionCard(session, isActive) {
           : ""
       }
 
-      <details class="session-details">
-        <summary>展开字段与关键事件</summary>
-        <div class="session-detail-grid">
-          <div><span>来源</span><strong>${escapeHtml(session.source)}</strong></div>
-          <div><span>首个事件</span><strong>${escapeHtml(session.firstSeen)}</strong></div>
-          <div><span>最后事件</span><strong>${escapeHtml(session.lastSeen)}</strong></div>
-          <div><span>活跃时长</span><strong>${escapeHtml(session.activeWindow)}</strong></div>
-          <div><span>总事件</span><strong>${session.totalEvents}</strong></div>
-          <div><span>关键事件</span><strong>${session.meaningfulEvents}</strong></div>
-        </div>
-        <div class="session-trail session-trail-detailed">
-          ${session.timeline
-            .slice(0, 6)
-            .map((event) => `<span class="trail-chip">${escapeHtml(`${event.at} · ${event.label}`)}</span>`)
-            .join("")}
-        </div>
-      </details>
+      ${
+        isExpanded
+          ? renderExpandedSession(session)
+          : ""
+      }
     </article>
   `;
 }
@@ -496,6 +486,7 @@ function renderSessionCard(session, isActive) {
 function renderSessionLibrary(sample) {
   const visibleCount = visibleCountBySite[activeSiteId] || Math.min(INITIAL_VISIBLE_COUNT, sample.sessions.length);
   const visibleSessions = sample.sessions.slice(0, visibleCount);
+  const expandedSessionId = expandedSessionBySite[activeSiteId];
 
   return `
     <section class="detail-card">
@@ -512,7 +503,7 @@ function renderSessionLibrary(sample) {
       </div>
       <div class="session-list">
         ${visibleSessions
-          .map((session) => renderSessionCard(session, session.id === selectedSessionBySite[activeSiteId]))
+          .map((session) => renderSessionCard(session, session.id === expandedSessionId))
           .join("")}
       </div>
     </section>
@@ -520,9 +511,6 @@ function renderSessionLibrary(sample) {
 }
 
 function renderSample(sample, site) {
-  ensureSiteState(activeSiteId);
-  const selectedSession = getSelectedSession(sample);
-
   return `
     <section class="journey-hero">
       <div class="hero-copy">
@@ -532,7 +520,7 @@ function renderSample(sample, site) {
           <span class="detail-pill">真实 Umami 样例</span>
           <span class="detail-pill">站点搜索可切换</span>
           <span class="detail-pill">可加载更多 session</span>
-          <span class="detail-pill">支持展开详情</span>
+          <span class="detail-pill">卡片内展开详情</span>
         </div>
       </div>
       <div class="mini-stat">
@@ -569,9 +557,35 @@ function renderSample(sample, site) {
       </section>
     </section>
 
-    ${renderSelectedSession(selectedSession)}
     ${renderSessionLibrary(sample)}
   `;
+}
+
+function attachJourneyHandlers(sample) {
+  journeyMain.querySelectorAll(".session-select-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const sessionId = button.dataset.sessionId;
+      expandedSessionBySite[activeSiteId] = expandedSessionBySite[activeSiteId] === sessionId ? null : sessionId;
+      renderJourney();
+    });
+  });
+
+  const loadMoreButton = document.querySelector("#load-more-sessions");
+  if (loadMoreButton) {
+    loadMoreButton.addEventListener("click", () => {
+      visibleCountBySite[activeSiteId] = Math.min(
+        sample.sessions.length,
+        (visibleCountBySite[activeSiteId] || INITIAL_VISIBLE_COUNT) + LOAD_MORE_COUNT,
+      );
+      renderJourney();
+    });
+  }
+
+  journeyMain.querySelectorAll("[data-copy]").forEach((button) => {
+    button.addEventListener("click", () => {
+      copyText(button.dataset.copy, button);
+    });
+  });
 }
 
 function renderJourney() {
@@ -595,24 +609,7 @@ function renderJourney() {
 
   ensureSiteState(activeSiteId);
   journeyMain.innerHTML = renderSample(sample, site);
-
-  journeyMain.querySelectorAll(".session-select-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      selectedSessionBySite[activeSiteId] = button.dataset.sessionId;
-      renderJourney();
-    });
-  });
-
-  const loadMoreButton = document.querySelector("#load-more-sessions");
-  if (loadMoreButton) {
-    loadMoreButton.addEventListener("click", () => {
-      visibleCountBySite[activeSiteId] = Math.min(
-        sample.sessions.length,
-        (visibleCountBySite[activeSiteId] || INITIAL_VISIBLE_COUNT) + LOAD_MORE_COUNT,
-      );
-      renderJourney();
-    });
-  }
+  attachJourneyHandlers(sample);
 }
 
 searchInput.addEventListener("input", () => {
