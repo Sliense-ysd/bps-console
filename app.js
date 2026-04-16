@@ -13,6 +13,19 @@ const modules = [
   { id: "heatmap", title: "热力图", meta: "预留", category: "分析", status: "planned", tags: ["热力图", "点击"], href: "#" },
   { id: "alerts", title: "告警面板", meta: "预留", category: "分析", status: "planned", tags: ["告警", "异常"], href: "#" },
 
+  { id: "admin-users", title: "管理员用户", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "users", "用户"], href: "https://musicmake.ai/admin/users" },
+  { id: "admin-scenes", title: "管理员场景", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "scenes", "场景"], href: "https://musicmake.ai/admin/scenes" },
+  { id: "admin-works", title: "管理员作品", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "works", "作品"], href: "https://musicmake.ai/admin/works" },
+  { id: "admin-music-works", title: "音乐作品库", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "music works", "音乐作品"], href: "https://musicmake.ai/admin/music-works" },
+  { id: "admin-feedback", title: "反馈面板", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "feedback", "反馈"], href: "https://musicmake.ai/admin/feedback" },
+  { id: "admin-orders", title: "音乐订单", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "orders", "订单"], href: "https://musicmake.ai/admin/music-orders" },
+  { id: "admin-pdf-concepts", title: "PDF 概念单", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "pdf", "concepts"], href: "https://musicmake.ai/admin/music-orders/pdf-concepts" },
+  { id: "admin-revenue-sites", title: "站点收入", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "revenue", "sites"], href: "https://musicmake.ai/admin/revenue-sites" },
+  { id: "admin-site-conversion", title: "站点转化", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "conversion", "site"], href: "https://musicmake.ai/admin/site-conversion" },
+  { id: "admin-analytics-dashboard", title: "分析仪表盘", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "analytics", "dashboard"], href: "https://musicmake.ai/admin/analytics-dashboard" },
+  { id: "admin-promo-codes", title: "推广码管理", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "promotion codes", "推广码"], href: "https://musicmake.ai/admin/growth/promotion-codes" },
+  { id: "admin-referrals", title: "推荐关系", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "referrals", "推荐"], href: "https://musicmake.ai/admin/growth/referrals" },
+
   { id: "monitoring", title: "监控与部署", meta: "Dokploy", category: "运维", status: "private", tags: ["dokploy", "部署", "告警"], href: "http://31.97.143.166:3000/dashboard/monitoring" },
   { id: "deployments", title: "部署记录", meta: "Dokploy", category: "运维", status: "private", tags: ["deploy", "发布"], href: "http://31.97.143.166:3000/dashboard/deployments" },
   { id: "schedules", title: "定时任务", meta: "Dokploy", category: "运维", status: "private", tags: ["cron", "任务", "自动化"], href: "http://31.97.143.166:3000/dashboard/schedules" },
@@ -38,7 +51,7 @@ const modules = [
   { id: "favorites", title: "常用收藏", meta: "本页", category: "个人", status: "live", tags: ["收藏", "常用"], href: "#" },
 ];
 
-const categoryOrder = ["专注", "信号", "分析", "运维", "增长", "收入", "个人"];
+const categoryOrder = ["专注", "信号", "分析", "管理员", "运维", "增长", "收入", "个人"];
 const statusLabels = {
   live: "已接入",
   private: "私有",
