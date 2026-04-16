@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户路径</title>
+    <meta
+      name="description"
+      content="BPS 用户路径页：按网站筛选查看 Umami 真实 session 样例，并展示首版路径图。"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="detail-shell">
+      <header class="detail-header">
+        <div>
+          <a class="back-link" href="../">← 返回总控台</a>
+          <h1>用户路径</h1>
+          <p>这版先把真实 Umami 样例压成静态展示。先搜网站，再看右侧的路径图、诊断重点和代表性 session。</p>
+        </div>
+        <div class="detail-stats">
+          <span id="site-total">0 个站点</span>
+          <span id="site-preview-count">0 个已预载样例</span>
+        </div>
+      </header>
+
+      <section class="detail-toolbar">
+        <input id="site-search" type="search" placeholder="搜索网站名、域名、关键词" />
+        <div class="helper-copy">绿色站点有真实路径样例，灰色站点先作为目录入口占位。</div>
+      </section>
+
+      <div class="journey-layout">
+        <aside class="site-panel">
+          <div class="site-panel-head">
+            <strong>网站列表</strong>
+            <span class="helper-copy" id="site-match-count">0 个结果</span>
+          </div>
+          <div id="site-list" class="site-list"></div>
+        </aside>
+
+        <section id="journey-main" class="journey-main"></section>
+      </div>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

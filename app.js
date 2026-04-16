@@ -3,11 +3,11 @@ const modules = [
   { id: "builderpulse", title: "BuilderPulse", meta: "日报", category: "信号", status: "live", tags: ["新闻", "信号", "市场"], href: "https://github.com/BuilderPulse/BuilderPulse" },
   { id: "news", title: "新闻入口", meta: "预留", category: "信号", status: "planned", tags: ["新闻", "情报"], href: "#" },
   { id: "buildpost", title: "Build Post", meta: "预留", category: "信号", status: "planned", tags: ["帖子", "build"], href: "#" },
-  { id: "twitter-tags", title: "推特标签", meta: "预留", category: "信号", status: "planned", tags: ["twitter", "x", "标签"], href: "#" },
+  { id: "twitter-tags", title: "推特标签", meta: "20个标签", category: "信号", status: "live", tags: ["twitter", "x", "标签"], href: "./twitter-tags/" },
   { id: "github-bps", title: "BPS 仓库", meta: "GitHub", category: "信号", status: "live", tags: ["github", "repo"], href: "https://github.com/Sliense-ysd/bps-console" },
 
   { id: "analytics", title: "流量分析", meta: "Umami", category: "分析", status: "private", tags: ["umami", "流量", "路径"], href: "https://analytics.seekorigin.ai" },
-  { id: "journey", title: "用户路径", meta: "预留", category: "分析", status: "planned", tags: ["路径", "漏斗", "会话"], href: "#" },
+  { id: "journey", title: "用户路径", meta: "3站样例", category: "分析", status: "live", tags: ["路径", "漏斗", "会话"], href: "./journeys/" },
   { id: "clarity", title: "录屏回放", meta: "预留", category: "分析", status: "planned", tags: ["clarity", "回放"], href: "#" },
   { id: "conversion", title: "转化漏斗", meta: "预留", category: "分析", status: "planned", tags: ["转化", "漏斗"], href: "#" },
   { id: "heatmap", title: "热力图", meta: "预留", category: "分析", status: "planned", tags: ["热力图", "点击"], href: "#" },
@@ -99,7 +99,7 @@ function createButton(module) {
   card.className = "entry";
 
   const isPinned = pinned.has(module.id);
-  const isInternal = module.href.startsWith("#");
+  const isInternal = !module.href.startsWith("#") && !/^https?:\/\//.test(module.href);
   const linkAttrs =
     module.status === "planned"
       ? 'tabindex="-1" aria-disabled="true"'
