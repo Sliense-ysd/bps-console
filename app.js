@@ -67,13 +67,24 @@ const pinnedCount = document.querySelector("#pinned-count");
 const audioStatus = document.querySelector("#audio-status");
 const volumeControl = document.querySelector("#volume");
 
-const pinned = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+function loadPinnedIds() {
+  try {
+    const raw = window.localStorage.getItem(storageKey);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+const pinned = new Set(loadPinnedIds());
 let pinnedOnly = false;
 let audioContext = null;
 let audioNodes = [];
 
 function persistPins() {
-  localStorage.setItem(storageKey, JSON.stringify([...pinned]));
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify([...pinned]));
+  } catch {}
   pinnedCount.textContent = String(pinned.size);
 }
 
