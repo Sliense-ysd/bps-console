@@ -24,6 +24,7 @@ const modules = [
   { id: "admin-music-works", title: "音乐作品库", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "music works", "音乐作品"], href: "https://musicmake.ai/admin/music-works" },
   { id: "admin-feedback", title: "反馈面板", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "feedback", "反馈"], href: "https://musicmake.ai/admin/feedback" },
   { id: "admin-orders", title: "音乐订单", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "orders", "订单"], href: "https://musicmake.ai/admin/music-orders" },
+  { id: "admin-undelivered", title: "未交付订单", meta: "songunique·见证歌曲", category: "管理员", status: "private", tags: ["admin", "undelivered", "未交付", "交付", "delivery", "songunique"], href: "https://musicmake.ai/admin/music-orders?orderType=testimony" },
   { id: "admin-pdf-concepts", title: "PDF 概念单", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "pdf", "concepts"], href: "https://musicmake.ai/admin/music-orders/pdf-concepts" },
   { id: "admin-revenue-sites", title: "站点收入", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "revenue", "sites"], href: "https://musicmake.ai/admin/revenue-sites" },
   { id: "admin-site-conversion", title: "站点转化", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "conversion", "site"], href: "https://musicmake.ai/admin/site-conversion" },
