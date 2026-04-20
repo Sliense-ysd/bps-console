@@ -31,6 +31,7 @@ const investigationConfigBySite = {
       { label: "用户后台", href: "https://musicmake.ai/admin/users" },
       { label: "作品管理", href: "https://musicmake.ai/admin/music-works" },
       { label: "订单页", href: "https://musicmake.ai/admin/music-orders" },
+      { label: "转化漏斗", href: "https://brain.seekorigin.ai/funnels/" },
       { label: "分析仪表盘", href: "https://musicmake.ai/admin/analytics-dashboard" },
       { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
     ],
@@ -40,6 +41,7 @@ const investigationConfigBySite = {
       { label: "Create", href: "https://songunique.com/create" },
       { label: "结账页", href: "https://songunique.com/complete-order" },
       { label: "作品追踪", href: "https://songunique.com/track" },
+      { label: "转化漏斗", href: "https://brain.seekorigin.ai/funnels/" },
       { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
     ],
     clarityCandidates: [

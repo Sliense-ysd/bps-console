@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>转化漏斗</title>
+    <meta
+      name="description"
+      content="BPS 转化漏斗页：按站点查看主链路漏斗、逐步转化率、支付阶段诊断与相关入口。"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="detail-shell">
+      <header class="detail-header">
+        <div>
+          <a class="back-link" href="../">← 返回总控台</a>
+          <h1>转化漏斗</h1>
+          <p>
+            这版先把站点级主链路漏斗收进 BPS。优先看核心转化链路，再用辅助诊断判断问题更偏入口、表单、还是支付阶段。
+          </p>
+        </div>
+        <div class="detail-stats">
+          <span id="funnel-site-total">0 个站点</span>
+          <span id="funnel-native-count">0 个原生漏斗</span>
+          <span>默认只展示可行动信息</span>
+        </div>
+      </header>
+
+      <section class="detail-toolbar">
+        <input
+          id="funnel-site-search"
+          type="search"
+          placeholder="搜索站点名、域名、关键词"
+        />
+        <div class="helper-copy">
+          绿色站点是当前已原生化漏斗，灰色站点先保留外部后台入口。
+        </div>
+      </section>
+
+      <div class="journey-layout">
+        <aside class="site-panel">
+          <div class="site-panel-head">
+            <strong>站点列表</strong>
+            <span class="helper-copy" id="funnel-match-count">0 个结果</span>
+          </div>
+          <div id="funnel-site-list" class="site-list"></div>
+        </aside>
+
+        <section id="funnel-main" class="journey-main"></section>
+      </div>
+    </main>
+
+    <script src="/brain-waves/persistent-player.js" defer></script>
+    <script src="/funnels/data.js" defer></script>
+    <script src="/funnels/app.js" defer></script>
+  </body>
+</html>

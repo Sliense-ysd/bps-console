@@ -20,7 +20,7 @@ const sections = [
       { label: "用户路径页", code: "bps", note: "站内的 Umami 路径样例页。", href: "/journeys/" },
       { label: "Microsoft Clarity", code: "portal", note: "录屏回放和热图主入口。", href: "https://clarity.microsoft.com/projects" },
       { label: "musicmake 分析仪表盘", code: "admin", note: "musicmake.ai 管理后台的分析页。", href: "https://musicmake.ai/admin/analytics-dashboard" },
-      { label: "musicmake 站点转化", code: "admin", note: "看站点级 conversion 数据。", href: "https://musicmake.ai/admin/site-conversion" },
+      { label: "BPS 转化漏斗", code: "bps", note: "站点级主链路漏斗总入口，优先看 SongUnique。", href: "/funnels/" },
       { label: "Cron Hub", code: "10 tasks", note: "所有定时监控任务的看板。", href: "/cron-hub/" },
     ],
   },
@@ -57,7 +57,7 @@ const sections = [
     items: [
       { label: "站点收入", code: "musicmake", note: "站点级收入看板。", href: "https://musicmake.ai/admin/revenue-sites" },
       { label: "音乐订单", code: "musicmake", note: "订单列表和支付状态。", href: "https://musicmake.ai/admin/music-orders" },
-      { label: "站点转化", code: "musicmake", note: "看站点 funnel 和 conversion。", href: "https://musicmake.ai/admin/site-conversion" },
+      { label: "BPS 转化漏斗", code: "bps", note: "站点 funnel 总入口，SongUnique 已原生化。", href: "/funnels/" },
       { label: "分析仪表盘", code: "musicmake", note: "后台分析总览。", href: "https://musicmake.ai/admin/analytics-dashboard" },
       { label: "推广码管理", code: "musicmake", note: "增长相关优惠码。", href: "https://musicmake.ai/admin/growth/promotion-codes" },
       { label: "推荐关系", code: "musicmake", note: "referral 关系链。", href: "https://musicmake.ai/admin/growth/referrals" },

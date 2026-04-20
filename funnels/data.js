@@ -1,0 +1,295 @@
+window.FUNNEL_SNAPSHOTS = {
+  songunique: {
+    mode: "native",
+    window: "最近 7 天",
+    source:
+      "Umami · songunique.com 独立 website · session 去重 · 顺序漏斗",
+    updatedAt: "2026-04-20",
+    totals: {
+      sessionsWithCustomEvents: 219,
+      homepageSessions: 192,
+      paymentSuccessSessions: 3,
+      overallRate: 1.6,
+    },
+    summaryStats: [
+      { label: "口径", value: "最近 7 天" },
+      { label: "主链路成功", value: "3" },
+      { label: "首页到成功", value: "1.6%" },
+    ],
+    hero: {
+      title: "SongUnique",
+      subtitle:
+        "目前最该盯的不是支付技术成功率，而是首页首屏到 CTA、以及 checkout 页到 payment click 的心理摩擦。",
+      pills: [
+        "主链路已定义",
+        "顺序 session funnel",
+        "可直接行动",
+      ],
+    },
+    stages: [
+      { id: "homepage_view", label: "首页曝光", count: 192 },
+      { id: "hero_cta_click", label: "首屏 CTA 点击", count: 41 },
+      { id: "ts_form_complete", label: "表单完成", count: 19 },
+      { id: "checkout_page_view", label: "结账页曝光", count: 18 },
+      { id: "payment_click", label: "支付点击", count: 7 },
+      { id: "checkout_redirect", label: "跳转支付", count: 6 },
+      { id: "payment_success", label: "支付成功", count: 3 },
+    ],
+    conversions: [
+      {
+        id: "landing-to-cta",
+        label: "首页 → CTA",
+        rate: 21.4,
+        numerator: 41,
+        denominator: 192,
+        tone: "warn",
+        note: "首屏把人送进 create 的能力偏弱，是第一处大漏点。",
+      },
+      {
+        id: "cta-to-form",
+        label: "CTA → 表单完成",
+        rate: 46.3,
+        numerator: 19,
+        denominator: 41,
+        tone: "info",
+        note: "多步表单整体可接受，但还没拆到 step 级流失。",
+      },
+      {
+        id: "form-to-checkout",
+        label: "表单完成 → 结账页",
+        rate: 94.7,
+        numerator: 18,
+        denominator: 19,
+        tone: "success",
+        note: "表单完成后基本都能顺利到 complete-order。",
+      },
+      {
+        id: "checkout-to-payclick",
+        label: "结账页 → 支付点击",
+        rate: 38.9,
+        numerator: 7,
+        denominator: 18,
+        tone: "warn",
+        note: "这是当前第二个大漏点，更像文案/信任/价格心理问题。",
+      },
+      {
+        id: "payclick-to-redirect",
+        label: "支付点击 → 跳转支付",
+        rate: 85.7,
+        numerator: 6,
+        denominator: 7,
+        tone: "success",
+        note: "按钮点击后的前端/服务端链路总体可用，不是主漏点。",
+      },
+      {
+        id: "redirect-to-success",
+        label: "跳转支付 → 支付成功",
+        rate: 50.0,
+        numerator: 3,
+        denominator: 6,
+        tone: "info",
+        note: "有流失，但量级暂时低于 checkout 页心理摩擦的影响。",
+      },
+    ],
+    diagnostics: [
+      {
+        label: "checkout_page_view 唯一 session",
+        value: "44",
+        note: "高于 hero CTA 的 42，说明存在回访/直达 checkout 流量。",
+      },
+      {
+        label: "payment_click 唯一 session",
+        value: "12",
+        note: "原始事件 48 次，重复点击很多，不能直接看 raw count。",
+      },
+      {
+        label: "ts_checkout_start 唯一 session",
+        value: "11",
+        note: "支付点击之后大多能进入真正的 checkout 启动。",
+      },
+      {
+        label: "checkout_error 唯一 session",
+        value: "6",
+        note: "确实有技术失败，但目前不是最大结构性漏点。",
+      },
+      {
+        label: "payment_incomplete 唯一 session",
+        value: "3",
+        note: "支付中断存在，但总体量级仍低于 checkout 页未点击支付。",
+      },
+      {
+        label: "payment_success / checkout_status",
+        value: "7 / 7",
+        note: "成功页与 checkout status 当前对齐，成功回写链路是通的。",
+      },
+    ],
+    insights: [
+      "首页到 Hero CTA 只有 21.4%，说明首屏 promise 和按钮驱动力还不够强。",
+      "checkout_page_view 到 payment_click 只有 38.9%，当前最值得优先优化的是 complete-order 页。",
+      "支付点击后的技术路径并不差：payment_click → ts_checkout_start → checkout_redirect 基本顺畅。",
+      "raw event count 已经明显失真，所以站点漏斗必须默认使用顺序 session 口径。",
+    ],
+    nextActions: [
+      "优先优化首页 Hero 的 promise、social proof 和 CTA 文案。",
+      "再优化 complete-order 页的信任、交付承诺和价格心理承接。",
+      "下一轮把 ts_form_step_* 拆成 step 级报表，定位表单具体卡点。",
+    ],
+    links: [
+      { label: "用户路径", href: "/journeys/" },
+      { label: "Umami", href: "https://analytics.seekorigin.ai/" },
+      { label: "Clarity", href: "https://clarity.microsoft.com/projects" },
+      { label: "Create", href: "https://songunique.com/create" },
+      { label: "结账页", href: "https://songunique.com/complete-order" },
+      {
+        label: "未交付订单",
+        href: "https://musicmake.ai/admin/music-orders?orderType=testimony",
+      },
+    ],
+  },
+  musicmake: {
+    mode: "native",
+    window: "最近 7 天",
+    source:
+      "Umami · musicmake.ai 独立 website · session 去重 · 顺序漏斗",
+    updatedAt: "2026-04-20",
+    totals: {
+      sessionsWithCustomEvents: 485,
+      generatorSessions: 113,
+      checkoutRedirectSessions: 4,
+      overallRate: 3.5,
+    },
+    summaryStats: [
+      { label: "口径", value: "最近 7 天" },
+      { label: "激活主链路成功", value: "8" },
+      { label: "生成器到支付跳转", value: "3.5%" },
+    ],
+    hero: {
+      title: "MusicMake",
+      subtitle:
+        "MusicMake 更像双漏斗站点：先看生成激活，再看定价到结账的变现链路。不能像 SongUnique 那样强压成一条单路径。",
+      pills: ["双漏斗", "顺序 session funnel", "生成优先"],
+    },
+    stages: [
+      { id: "generator_section_view", label: "看到生成器", count: 113 },
+      { id: "music_generate_submit", label: "提交生成", count: 31 },
+      { id: "music_generate_success", label: "生成成功", count: 8 },
+    ],
+    conversions: [
+      {
+        id: "generator-to-submit",
+        label: "生成器曝光 → 提交生成",
+        rate: 27.4,
+        numerator: 31,
+        denominator: 113,
+        tone: "info",
+        note: "主站核心问题仍是把访问转成首次有效提交。",
+      },
+      {
+        id: "submit-to-success",
+        label: "提交生成 → 生成成功",
+        rate: 25.8,
+        numerator: 8,
+        denominator: 31,
+        tone: "warn",
+        note: "成功率不高，blocked / fail 对整体体验影响很大。",
+      },
+    ],
+    subFunnels: [
+      {
+        title: "变现子漏斗",
+        subtitle: "把已经进入 pricing 的会话继续送到 checkout。",
+        stages: [
+          { id: "pricing_view", label: "查看定价", count: 37 },
+          { id: "pricing_checkout_click", label: "点击结账", count: 4 },
+          { id: "checkout_redirect", label: "跳转支付", count: 4 },
+          { id: "checkout_status", label: "支付结果", count: 0 },
+        ],
+        conversions: [
+          {
+            label: "定价页 → 点击结账",
+            rate: 10.8,
+            numerator: 4,
+            denominator: 37,
+            tone: "warn",
+            note: "当前 pricing 到结账的点击意愿偏弱。",
+          },
+          {
+            label: "点击结账 → 跳转支付",
+            rate: 100.0,
+            numerator: 4,
+            denominator: 4,
+            tone: "success",
+            note: "进入 checkout 后前端链路基本通。",
+          },
+          {
+            label: "跳转支付 → 支付结果",
+            rate: 0.0,
+            numerator: 0,
+            denominator: 4,
+            tone: "warn",
+            note: "最近 7 天当前口径下没有看到顺序成功结果，需继续看 payment / webhook 细节。",
+          },
+        ],
+      },
+    ],
+    diagnostics: [
+      {
+        label: "music_generate_submit 唯一 session",
+        value: "136",
+        note: "说明很多会话会直接进入生成动作，不一定先走 lp_view。",
+      },
+      {
+        label: "music_generate_blocked 唯一 session",
+        value: "100",
+        note: "block 量级很高，是从激活走向变现前必须面对的摩擦。",
+      },
+      {
+        label: "pricing_view 唯一 session",
+        value: "37",
+        note: "看到定价的人不少，但往下点 checkout 的比例很低。",
+      },
+      {
+        label: "checkout_redirect / checkout_status",
+        value: "4 / 1",
+        note: "能跳出去，但最近 7 天按顺序串起来的最终支付成功信号很弱。",
+      },
+      {
+        label: "payment_incomplete 唯一 session",
+        value: "2",
+        note: "已经能看到支付中断，但失败解释仍然不够细。",
+      },
+      {
+        label: "lp_view 唯一 session",
+        value: "98",
+        note: "主站入口不只首页，还混有功能页和内容流量，所以不能只盯首页转化。",
+      },
+    ],
+    insights: [
+      "MusicMake 的首要任务不是纯 checkout 优化，而是把更多访问转成可用的成功生成。",
+      "blocked session 量级很大，说明会员提示/额度限制是核心分水岭。",
+      "pricing 之后的技术跳转没大问题，真正弱的是定价页到点击结账的意愿。",
+      "这个站点更适合长期看“激活漏斗 + 变现子漏斗”，而不是单一路径。",
+    ],
+    nextActions: [
+      "优先优化生成成功率和 blocked 后的承接，不要过早只盯支付页。",
+      "专门审 pricing_view → pricing_checkout_click 的文案、方案和 paywall 呈现。",
+      "后续需要把 checkout_status 再细分成 success / failed / timeout，避免末端语义不清。",
+    ],
+    links: [
+      { label: "用户路径", href: "/journeys/" },
+      {
+        label: "分析仪表盘",
+        href: "https://musicmake.ai/admin/analytics-dashboard",
+      },
+      {
+        label: "站点转化（旧页）",
+        href: "https://musicmake.ai/admin/site-conversion",
+      },
+      { label: "Umami", href: "https://analytics.seekorigin.ai/" },
+      {
+        label: "音乐订单",
+        href: "https://musicmake.ai/admin/music-orders",
+      },
+    ],
+  },
+};
