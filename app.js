@@ -27,7 +27,7 @@ const modules = [
   { id: "admin-undelivered", title: "未交付订单", meta: "songunique·见证歌曲", category: "管理员", status: "private", tags: ["admin", "undelivered", "未交付", "交付", "delivery", "songunique"], href: "https://musicmake.ai/admin/music-orders?orderType=testimony" },
   { id: "admin-pdf-concepts", title: "PDF 概念单", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "pdf", "concepts"], href: "https://musicmake.ai/admin/music-orders/pdf-concepts" },
   { id: "admin-revenue-sites", title: "站点收入", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "revenue", "sites"], href: "https://musicmake.ai/admin/revenue-sites" },
-  { id: "admin-site-conversion", title: "站点转化", meta: "BPS 原生页", category: "管理员", status: "live", tags: ["admin", "conversion", "site", "songunique"], href: "/funnels/" },
+  { id: "admin-site-conversion", title: "站点转化总览", meta: "BPS 原生页", category: "管理员", status: "live", tags: ["admin", "conversion", "site", "songunique", "musicmake"], href: "/funnels/#site-conversion-overview" },
   { id: "admin-analytics-dashboard", title: "分析仪表盘", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "analytics", "dashboard"], href: "https://musicmake.ai/admin/analytics-dashboard" },
   { id: "admin-promo-codes", title: "推广码管理", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "promotion codes", "推广码"], href: "https://musicmake.ai/admin/growth/promotion-codes" },
   { id: "admin-referrals", title: "推荐关系", meta: "musicmake.ai", category: "管理员", status: "private", tags: ["admin", "referrals", "推荐"], href: "https://musicmake.ai/admin/growth/referrals" },

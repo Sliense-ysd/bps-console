@@ -10,7 +10,7 @@
     />
     <meta name="robots" content="noindex,nofollow" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=20260425d" />
   </head>
   <body class="subpage-body">
     <main class="detail-shell">
@@ -40,7 +40,16 @@
         </div>
       </section>
 
-      <div class="journey-layout">
+      <nav class="view-tabs" aria-label="转化分析视图">
+        <button class="view-tab active" data-funnel-view="funnels" type="button">
+          主流程漏斗
+        </button>
+        <button class="view-tab" data-funnel-view="site-conversion" type="button">
+          站点转化总览
+        </button>
+      </nav>
+
+      <div id="funnel-view" class="journey-layout">
         <aside class="site-panel">
           <div class="site-panel-head">
             <strong>站点列表</strong>
@@ -51,10 +60,12 @@
 
         <section id="funnel-main" class="journey-main"></section>
       </div>
+
+      <section id="site-conversion-view" class="journey-main" hidden></section>
     </main>
 
     <script src="/brain-waves/persistent-player.js?v=20260420d" defer></script>
-    <script src="/funnels/data.js?v=20260425a" defer></script>
-    <script src="/funnels/app.js?v=20260425a" defer></script>
+    <script src="/funnels/data.js?v=20260425b" defer></script>
+    <script src="/funnels/app.js?v=20260425b" defer></script>
   </body>
 </html>

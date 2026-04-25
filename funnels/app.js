@@ -16,14 +16,23 @@ const siteRegistry = [
 ];
 
 const funnelSamples = window.FUNNEL_SNAPSHOTS || {};
+const siteConversionOverview = window.SITE_CONVERSION_OVERVIEW || null;
 const searchInput = document.querySelector("#funnel-site-search");
+const detailToolbar = document.querySelector(".detail-toolbar");
 const siteList = document.querySelector("#funnel-site-list");
 const siteTotal = document.querySelector("#funnel-site-total");
 const nativeCount = document.querySelector("#funnel-native-count");
 const matchCount = document.querySelector("#funnel-match-count");
 const funnelMain = document.querySelector("#funnel-main");
+const funnelView = document.querySelector("#funnel-view");
+const siteConversionView = document.querySelector("#site-conversion-view");
+const viewTabs = document.querySelectorAll("[data-funnel-view]");
 
-let activeSiteId = "songunique";
+let activeSiteId = window.location.hash === "#musicmake" ? "musicmake" : "songunique";
+let activeView =
+  window.location.hash === "#site-conversion-overview"
+    ? "site-conversion"
+    : "funnels";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -126,6 +135,35 @@ function renderLinkButtons(links) {
       `,
     )
     .join("");
+}
+
+function formatInteger(value) {
+  return Number(value || 0).toLocaleString("en-US");
+}
+
+function formatRate(value) {
+  return `${Number(value || 0).toFixed(1)}%`;
+}
+
+function formatUsdCents(value) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(Number(value || 0) / 100);
+}
+
+function formatDateTime(value) {
+  if (!value) return "—";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "—";
+
+  return date.toLocaleString("zh-CN", {
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
 function renderNativeSample(sample, site) {
@@ -317,6 +355,198 @@ function renderNativeSample(sample, site) {
   `;
 }
 
+function renderSiteConversionOverview() {
+  if (!siteConversionOverview) {
+    siteConversionView.innerHTML = `
+      <section class="empty-state">
+        <h2>站点转化总览还没有接入</h2>
+        <p>当前静态快照不存在，先从 MusicMake 后台查看实时页。</p>
+      </section>
+    `;
+    return;
+  }
+
+  const totals = siteConversionOverview.totals || {};
+  const rows = siteConversionOverview.siteSummaries || [];
+  const risks = siteConversionOverview.risks || [];
+
+  siteConversionView.innerHTML = `
+    <section class="journey-hero site-conversion-hero">
+      <div class="hero-copy">
+        <div class="detail-pill">站点转化总览</div>
+        <h2>${escapeHtml(siteConversionOverview.title)}</h2>
+        <p>
+          ${escapeHtml(siteConversionOverview.window)} · ${escapeHtml(siteConversionOverview.dateRange.startDate)}
+          至 ${escapeHtml(siteConversionOverview.dateRange.endDate)}。BPS 只放聚合指标，不写入最近订单和下单人标识。
+        </p>
+        <div class="hero-pill-row">
+          <span class="detail-chip info">${escapeHtml(siteConversionOverview.source)}</span>
+          <span class="detail-chip info">更新于 ${escapeHtml(siteConversionOverview.updatedAt)}</span>
+        </div>
+      </div>
+      ${(siteConversionOverview.summaryStats || [])
+        .slice(0, 5)
+        .map(
+          (item) => `
+            <div class="mini-stat">
+              <span>${escapeHtml(item.label)}</span>
+              <strong>${escapeHtml(item.value)}</strong>
+            </div>
+          `,
+        )
+        .join("")}
+    </section>
+
+    <section class="journey-grid">
+      <article class="detail-card">
+        <div class="card-head">
+          <div>
+            <h3>30 天总览</h3>
+            <span>访客、checkout、下单人数、订单和收入放在同一个口径里看</span>
+          </div>
+          <span>${escapeHtml(siteConversionOverview.generatedAt)}</span>
+        </div>
+        <div class="session-summary-grid site-conversion-summary-grid">
+          <div class="summary-panel">
+            <span>独立访客</span>
+            <strong>${formatInteger(totals.uniqueVisitors)}</strong>
+            <div class="detail-note detail-note-muted">来自 tracking_session 与 Umami 访客补充。</div>
+          </div>
+          <div class="summary-panel">
+            <span>Checkout 人数</span>
+            <strong>${formatInteger(totals.checkoutActors)}</strong>
+            <div class="detail-note detail-note-muted">只计算 payment_attribution 中的 checkout actors。</div>
+          </div>
+          <div class="summary-panel">
+            <span>下单人数</span>
+            <strong>${formatInteger(totals.paidOrderUsers)}</strong>
+            <div class="detail-note detail-note-muted">同一 actor 多笔订单只算一位买家。</div>
+          </div>
+          <div class="summary-panel">
+            <span>成功订单</span>
+            <strong>${formatInteger(totals.paidOrderCount)}</strong>
+            <div class="detail-note detail-note-muted">支付成功且订单状态可计入收入。</div>
+          </div>
+          <div class="summary-panel">
+            <span>收入</span>
+            <strong>${formatUsdCents(totals.paidRevenueCents)}</strong>
+            <div class="detail-note detail-note-muted">只展示汇总金额，不展示单笔订单。</div>
+          </div>
+          <div class="summary-panel">
+            <span>整体转化率</span>
+            <strong>${formatRate(totals.overallConversionRate)}</strong>
+            <div class="detail-note detail-note-muted">成功下单人数 / 独立访客。</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="detail-card">
+        <div class="card-head">
+          <div>
+            <h3>当前重点</h3>
+            <span>先看哪里最值得继续追</span>
+          </div>
+        </div>
+        <div class="session-summary-grid">
+          ${(siteConversionOverview.highlights || [])
+            .map(
+              (item) => `
+                <div class="summary-panel">
+                  <span>${escapeHtml(item.label)}</span>
+                  <strong>${escapeHtml(item.value)}</strong>
+                  <div class="session-chip-row session-chip-row-compact">
+                    <span class="detail-chip info">${escapeHtml(item.site)}</span>
+                  </div>
+                  <div class="detail-note detail-note-muted">${escapeHtml(item.note)}</div>
+                </div>
+              `,
+            )
+            .join("")}
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-card">
+      <div class="card-head">
+        <div>
+          <h3>站点明细</h3>
+          <span>这张表来自 MusicMake 后台总览，但移除了最近订单明细</span>
+        </div>
+        <span>${escapeHtml(rows.length)} 个有动作的站点</span>
+      </div>
+      <div class="conversion-table-wrap">
+        <table class="conversion-table">
+          <thead>
+            <tr>
+              <th>站点</th>
+              <th>数据库</th>
+              <th>访客</th>
+              <th>Checkout</th>
+              <th>下单人数</th>
+              <th>订单数</th>
+              <th>收入</th>
+              <th>访客→Checkout</th>
+              <th>转化率</th>
+              <th>Checkout→支付</th>
+              <th>最近支付</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows
+              .map(
+                (row) => `
+                  <tr>
+                    <td>
+                      <strong>${escapeHtml(row.label)}</strong>
+                      <span>${escapeHtml(row.note)}</span>
+                    </td>
+                    <td>${escapeHtml(row.sourceDb)}</td>
+                    <td>${formatInteger(row.uniqueVisitors)}</td>
+                    <td>${formatInteger(row.checkoutActors)}</td>
+                    <td>${formatInteger(row.paidOrderUsers)}</td>
+                    <td>${formatInteger(row.paidOrderCount)}</td>
+                    <td>${formatUsdCents(row.paidRevenueCents)}</td>
+                    <td>${formatRate(row.visitorToCheckoutRate)}</td>
+                    <td>${formatRate(row.conversionRate)}</td>
+                    <td>${formatRate(row.checkoutCompletionRate)}</td>
+                    <td>${formatDateTime(row.latestPaidAt)}</td>
+                  </tr>
+                `,
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="journey-grid">
+      <article class="detail-card">
+        <div class="card-head">
+          <div>
+            <h3>归因提醒</h3>
+            <span>影响实际转化率解释的缺口</span>
+          </div>
+        </div>
+        <ul class="insight-list">
+          ${risks.map((risk) => `<li>${escapeHtml(risk)}</li>`).join("")}
+        </ul>
+      </article>
+
+      <article class="detail-card">
+        <div class="card-head">
+          <div>
+            <h3>相关入口</h3>
+            <span>需要订单明细时回到管理员后台</span>
+          </div>
+        </div>
+        <div class="lookup-link-row">
+          ${renderLinkButtons(siteConversionOverview.links || [])}
+        </div>
+      </article>
+    </section>
+  `;
+}
+
 function renderFunnel() {
   const site = siteRegistry.find((item) => item.id === activeSiteId);
   const sample = funnelSamples[activeSiteId];
@@ -335,10 +565,60 @@ function renderFunnel() {
     renderNativeSample(sample, site);
 }
 
+function setActiveView(view, { updateHash = true } = {}) {
+  activeView = view;
+  const showSiteConversion = activeView === "site-conversion";
+
+  funnelView.hidden = showSiteConversion;
+  siteConversionView.hidden = !showSiteConversion;
+  detailToolbar.hidden = showSiteConversion;
+
+  viewTabs.forEach((button) => {
+    const active = button.dataset.funnelView === activeView;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+
+  if (!updateHash) return;
+
+  const nextHash = showSiteConversion
+    ? "#site-conversion-overview"
+    : `#${activeSiteId}`;
+  if (window.location.hash !== nextHash) {
+    history.replaceState(null, "", nextHash);
+  }
+}
+
+function applyHashState() {
+  const hash = window.location.hash.replace(/^#/, "");
+  if (hash === "site-conversion-overview") {
+    setActiveView("site-conversion", { updateHash: false });
+    return;
+  }
+
+  if (siteRegistry.some((site) => site.id === hash)) {
+    activeSiteId = hash;
+  }
+
+  renderSiteList();
+  renderFunnel();
+  setActiveView("funnels", { updateHash: false });
+}
+
 searchInput.addEventListener("input", () => {
   renderSiteList();
   renderFunnel();
 });
 
+viewTabs.forEach((button) => {
+  button.addEventListener("click", () => {
+    setActiveView(button.dataset.funnelView);
+  });
+});
+
+window.addEventListener("hashchange", applyHashState);
+
+renderSiteConversionOverview();
 renderSiteList();
 renderFunnel();
+setActiveView(activeView, { updateHash: false });
