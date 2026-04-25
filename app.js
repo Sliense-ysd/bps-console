@@ -54,13 +54,15 @@ const modules = [
   { id: "subscriptions", title: "订阅状态", meta: "常用入口", category: "收入", status: "live", tags: ["订阅", "续费"], href: "/quick-links/#revenue" },
   { id: "credits", title: "积分经济", meta: "常用入口", category: "收入", status: "live", tags: ["积分", "消耗"], href: "/quick-links/#revenue" },
 
+  { id: "spending", title: "开支看板", meta: "BPS 原生页", category: "成本", status: "live", tags: ["开支", "成本", "expense", "广告", "ads", "api", "vps", "billing", "stripe", "openrouter", "cloudflare", "google ads"], href: "/spending/" },
+
   { id: "workspace", title: "工作区管理", meta: "常用入口", category: "个人", status: "live", tags: ["workspace", "管理"], href: "/quick-links/#personal" },
   { id: "notes", title: "笔记入口", meta: "常用入口", category: "个人", status: "live", tags: ["笔记", "记录"], href: "/quick-links/#personal" },
   { id: "inbox", title: "收件箱", meta: "常用入口", category: "个人", status: "live", tags: ["inbox", "待办"], href: "/quick-links/#personal" },
   { id: "favorites", title: "常用收藏", meta: "本页", category: "个人", status: "live", tags: ["收藏", "常用"], href: "#" },
 ];
 
-const categoryOrder = ["专注", "信号", "分析", "管理员", "运维", "增长", "收入", "个人"];
+const categoryOrder = ["专注", "信号", "分析", "管理员", "运维", "增长", "收入", "成本", "个人"];
 const statusLabels = {
   live: "已接入",
   private: "私有",

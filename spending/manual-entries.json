@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "lastEdited": "2026-04-25",
+  "note": "Manual spend records. Edit by hand and re-run scripts/collect-spending.mjs. Each entry covers a specific period; the collector decides whether it falls inside the rolling 30-day window. See spending/README.md for templates.",
+  "entries": [
+    {
+      "id": "anthropic-2026-04",
+      "type": "api",
+      "platform": "Anthropic",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "替换为 Anthropic Console > Billing 当月实际数字"
+    },
+    {
+      "id": "openai-2026-04",
+      "type": "api",
+      "platform": "OpenAI",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "替换为 platform.openai.com > Usage 当月数字"
+    },
+    {
+      "id": "xai-2026-04",
+      "type": "api",
+      "platform": "xAI Grok",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "替换为 console.x.ai > Billing 当月数字"
+    },
+    {
+      "id": "google-ai-studio-2026-04",
+      "type": "api",
+      "platform": "Google AI Studio",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "替换为 Google Cloud Billing > Generative Language API 数字"
+    },
+    {
+      "id": "microsoft-ads-2026-04",
+      "type": "ads",
+      "platform": "Microsoft Advertising",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "ads.microsoft.com > Reports > Account Performance 当月 Spend；v2 再用 SOAP API"
+    },
+    {
+      "id": "hostinger-vps-2026-04",
+      "type": "infra",
+      "platform": "Hostinger VPS",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "VPS 月费；按合同价或最近一笔账单填"
+    },
+    {
+      "id": "domains-2026-04",
+      "type": "infra",
+      "platform": "Domain Renewals",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "Cloudflare/Namecheap/Hostinger 域名续费当月合计"
+    },
+    {
+      "id": "resend-2026-04",
+      "type": "saas",
+      "platform": "Resend",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "resend.com 当月账单"
+    },
+    {
+      "id": "roxybrowser-2026-04",
+      "type": "saas",
+      "platform": "Roxy Browser",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "指纹浏览器订阅"
+    },
+    {
+      "id": "iproyal-2026-04",
+      "type": "saas",
+      "platform": "IPRoyal",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "代理订阅"
+    },
+    {
+      "id": "dataforseo-2026-04",
+      "type": "saas",
+      "platform": "DataForSEO",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "SEO 数据 API 充值/订阅"
+    },
+    {
+      "id": "seranking-2026-04",
+      "type": "saas",
+      "platform": "SE Ranking",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "SEO 排名追踪订阅"
+    },
+    {
+      "id": "backlink-publishers-2026-04",
+      "type": "backlink",
+      "platform": "Backlink Publishers",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "外链 publisher 平台合计（Notion/Telegraph/Medium/Maven/Pinterest 等如有付费）"
+    }
+  ]
+}

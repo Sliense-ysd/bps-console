@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>开支看板</title>
+    <meta
+      name="description"
+      content="BPS 开支看板：按成本类型汇总最近 30 天的广告、API、基础设施、工具订阅和外链开销。"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css?v=20260425d" />
+  </head>
+  <body class="subpage-body">
+    <main class="detail-shell">
+      <header class="detail-header">
+        <div>
+          <a class="back-link" href="../">← 返回总控台</a>
+          <h1>开支看板</h1>
+          <p>
+            收口外链、广告、API、基础设施、工具订阅五类成本。自动数据来自 Stripe / OpenRouter / Cloudflare / Google Ads；其他订阅由 manual-entries.json 维护。
+          </p>
+        </div>
+        <div class="detail-stats">
+          <span id="spending-total">—</span>
+          <span id="spending-window">—</span>
+          <span id="spending-delta">—</span>
+        </div>
+      </header>
+
+      <section id="spending-hero" class="journey-hero" hidden></section>
+
+      <section id="spending-by-type" class="detail-card" hidden>
+        <div class="card-head">
+          <div>
+            <h3>按成本类型拆分</h3>
+            <span>近 30 天合计与每类前几大平台</span>
+          </div>
+          <span id="spending-by-type-meta"></span>
+        </div>
+        <div id="spending-by-type-grid" class="session-summary-grid"></div>
+      </section>
+
+      <section id="spending-monthly" class="detail-card" hidden>
+        <div class="card-head">
+          <div>
+            <h3>月度归档</h3>
+            <span>按自然月聚合，最多 12 个月</span>
+          </div>
+          <span id="spending-monthly-meta"></span>
+        </div>
+        <div class="conversion-table-wrap">
+          <table class="conversion-table">
+            <thead>
+              <tr>
+                <th>月份</th>
+                <th>广告</th>
+                <th>API</th>
+                <th>基础设施</th>
+                <th>工具订阅</th>
+                <th>外链</th>
+                <th>合计</th>
+              </tr>
+            </thead>
+            <tbody id="spending-monthly-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="spending-records" class="detail-card" hidden>
+        <div class="card-head">
+          <div>
+            <h3>明细记录</h3>
+            <span>近 30 天每条记录，可按类型筛选</span>
+          </div>
+          <div id="spending-record-filters" class="hero-pill-row"></div>
+        </div>
+        <div class="conversion-table-wrap">
+          <table class="conversion-table">
+            <thead>
+              <tr>
+                <th>平台</th>
+                <th>类型</th>
+                <th>站点</th>
+                <th>窗口</th>
+                <th>来源</th>
+                <th>金额 (USD)</th>
+              </tr>
+            </thead>
+            <tbody id="spending-record-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="spending-status" class="detail-card" hidden>
+        <div class="card-head">
+          <div>
+            <h3>采集器状态</h3>
+            <span>每个数据源的最近一次拉取结果</span>
+          </div>
+          <span id="spending-updated"></span>
+        </div>
+        <div id="spending-status-rows" class="session-summary-grid"></div>
+      </section>
+
+      <section id="spending-empty" class="empty-state" hidden>
+        <h2>还没有开支数据</h2>
+        <p>
+          在 bps-console 仓库根目录跑 <code>node scripts/collect-spending.mjs</code> 生成首份
+          <code>spending/data.js</code>，再刷新本页。
+        </p>
+      </section>
+    </main>
+
+    <script src="/brain-waves/persistent-player.js?v=20260420d" defer></script>
+    <script src="/spending/data.js?v=20260425a" defer></script>
+    <script src="/spending/app.js?v=20260425a" defer></script>
+  </body>
+</html>

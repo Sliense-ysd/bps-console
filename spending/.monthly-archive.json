@@ -1,0 +1,16 @@
+{
+  "2026-04": {
+    "totalUSD": 704.36,
+    "byType": {
+      "ads": 678.18,
+      "api": 21.11,
+      "infra": 5.07,
+      "saas": 0,
+      "backlink": 0
+    },
+    "snapshotAt": "2026-04-25T07:31:11.736Z",
+    "windowFrom": "2026-03-26",
+    "windowTo": "2026-04-25",
+    "note": "rolling 30 days as of windowTo"
+  }
+}
