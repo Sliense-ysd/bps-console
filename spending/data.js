@@ -1,175 +1,255 @@
-// AUTO-GENERATED 2026-04-25T07:31:11.736Z — do not edit by hand. Run scripts/collect-spending.mjs.
+// AUTO-GENERATED 2026-04-26T16:00:44.142Z — do not edit by hand. Run scripts/collect-spending.mjs.
 window.SPENDING_SNAPSHOTS = {
-  "updatedAt": "2026-04-25T07:31:11.736Z",
+  "updatedAt": "2026-04-26T16:00:44.142Z",
   "window": {
-    "from": "2026-03-26",
-    "to": "2026-04-25",
+    "from": "2026-03-27",
+    "to": "2026-04-26",
     "label": "最近 30 天"
   },
   "totalsUSD": {
-    "last30Days": 704.36,
+    "last30Days": 1370.09,
     "last30DaysByType": {
-      "ads": 678.18,
-      "api": 21.11,
-      "infra": 5.07,
-      "saas": 0,
-      "backlink": 0
+      "ads": 745.94,
+      "api": 171.98,
+      "infra": 2.17,
+      "saas": 150,
+      "backlink": 300
     }
   },
   "byType": {
     "ads": {
-      "total": 678.18,
+      "total": 745.94,
       "items": [
         {
-          "id": "google-ads-2026-03-26-2026-04-25",
-          "date": "2026-04-25",
+          "id": "google-ads-2026-03-27-2026-04-26",
+          "date": "2026-04-26",
           "type": "ads",
           "platform": "Google Ads",
           "site": null,
-          "amountUSD": 678.18,
+          "amountUSD": 745.94,
           "currency": "USD",
           "source": "auto:google-ads-search",
-          "periodStart": "2026-03-26",
-          "periodEnd": "2026-04-25",
-          "note": "678.18 USD via v21 (1 child accts)"
+          "periodStart": "2026-03-27",
+          "periodEnd": "2026-04-26",
+          "note": "745.94 USD via v21 (1 child accts)"
         }
       ]
     },
     "api": {
-      "total": 21.11,
+      "total": 171.98,
       "items": [
         {
-          "id": "openrouter-lifetime-2026-04-25",
-          "date": "2026-04-25",
+          "id": "openrouter-lifetime-2026-04-26",
+          "date": "2026-04-26",
           "type": "api",
           "platform": "OpenRouter",
           "site": null,
-          "amountUSD": 21.11,
+          "amountUSD": 21.98,
           "currency": "USD",
           "source": "auto:openrouter-credits-lifetime",
-          "periodStart": "2026-03-26",
-          "periodEnd": "2026-04-25",
+          "periodStart": "2026-03-27",
+          "periodEnd": "2026-04-26",
           "note": "fallback: lifetime total_usage (generation list unavailable)"
+        },
+        {
+          "id": "kie-2026-04",
+          "date": "2026-04-30",
+          "type": "api",
+          "platform": "kie.ai",
+          "site": null,
+          "amountUSD": 150,
+          "currency": "USD",
+          "source": "manual",
+          "periodStart": "2026-04-01",
+          "periodEnd": "2026-04-30",
+          "note": "kie.ai 充值 4 月（15 笔 × $10；实际消耗 ≈ $143，月末余额 1342.3 credits）"
         }
       ]
     },
     "infra": {
-      "total": 5.07,
+      "total": 2.17,
       "items": [
         {
-          "id": "stripe-fee-musicmake.ai-2026-03-26-2026-04-25",
-          "date": "2026-04-25",
+          "id": "stripe-fee-musicmake.ai-2026-03-27-2026-04-26",
+          "date": "2026-04-26",
           "type": "infra",
           "platform": "Stripe",
           "site": "musicmake.ai",
-          "amountUSD": 3.09,
+          "amountUSD": 1.89,
           "currency": "USD",
           "source": "auto:stripe-balance-transactions",
-          "periodStart": "2026-03-26",
-          "periodEnd": "2026-04-25",
+          "periodStart": "2026-03-27",
+          "periodEnd": "2026-04-26",
           "note": "11 stripe_fee transactions"
         },
         {
-          "id": "stripe-fee-nanobanana-pro.org-2026-03-26-2026-04-25",
-          "date": "2026-04-25",
-          "type": "infra",
-          "platform": "Stripe",
-          "site": "nanobanana-pro.org",
-          "amountUSD": 1.7,
-          "currency": "USD",
-          "source": "auto:stripe-balance-transactions",
-          "periodStart": "2026-03-26",
-          "periodEnd": "2026-04-25",
-          "note": "4 stripe_fee transactions"
-        },
-        {
-          "id": "stripe-fee-img2video.io-2026-03-26-2026-04-25",
-          "date": "2026-04-25",
+          "id": "stripe-fee-img2video.io-2026-03-27-2026-04-26",
+          "date": "2026-04-26",
           "type": "infra",
           "platform": "Stripe",
           "site": "img2video.io",
           "amountUSD": 0.28,
           "currency": "USD",
           "source": "auto:stripe-balance-transactions",
-          "periodStart": "2026-03-26",
-          "periodEnd": "2026-04-25",
+          "periodStart": "2026-03-27",
+          "periodEnd": "2026-04-26",
           "note": "1 stripe_fee transactions"
         }
       ]
     },
     "saas": {
-      "total": 0,
-      "items": []
+      "total": 150,
+      "items": [
+        {
+          "id": "comment-throttle-2026-04",
+          "date": "2026-04-30",
+          "type": "saas",
+          "platform": "评论截流",
+          "site": null,
+          "amountUSD": 150,
+          "currency": "USD",
+          "source": "manual",
+          "periodStart": "2026-04-01",
+          "periodEnd": "2026-04-30",
+          "note": "评论截流服务 4 月"
+        }
+      ]
     },
     "backlink": {
-      "total": 0,
-      "items": []
+      "total": 300,
+      "items": [
+        {
+          "id": "adsy-2026-04",
+          "date": "2026-04-30",
+          "type": "backlink",
+          "platform": "Adsy",
+          "site": null,
+          "amountUSD": 100,
+          "currency": "USD",
+          "source": "manual",
+          "periodStart": "2026-04-01",
+          "periodEnd": "2026-04-30",
+          "note": "Adsy 外链 4 月"
+        },
+        {
+          "id": "daifa-2026-04",
+          "date": "2026-04-30",
+          "type": "backlink",
+          "platform": "代发",
+          "site": null,
+          "amountUSD": 200,
+          "currency": "USD",
+          "source": "manual",
+          "periodStart": "2026-04-01",
+          "periodEnd": "2026-04-30",
+          "note": "代发外链 4 月"
+        }
+      ]
     }
   },
   "records": [
     {
-      "id": "google-ads-2026-03-26-2026-04-25",
-      "date": "2026-04-25",
+      "id": "google-ads-2026-03-27-2026-04-26",
+      "date": "2026-04-26",
       "type": "ads",
       "platform": "Google Ads",
       "site": null,
-      "amountUSD": 678.18,
+      "amountUSD": 745.94,
       "currency": "USD",
       "source": "auto:google-ads-search",
-      "periodStart": "2026-03-26",
-      "periodEnd": "2026-04-25",
-      "note": "678.18 USD via v21 (1 child accts)"
+      "periodStart": "2026-03-27",
+      "periodEnd": "2026-04-26",
+      "note": "745.94 USD via v21 (1 child accts)"
     },
     {
-      "id": "openrouter-lifetime-2026-04-25",
-      "date": "2026-04-25",
+      "id": "daifa-2026-04",
+      "date": "2026-04-30",
+      "type": "backlink",
+      "platform": "代发",
+      "site": null,
+      "amountUSD": 200,
+      "currency": "USD",
+      "source": "manual",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "note": "代发外链 4 月"
+    },
+    {
+      "id": "kie-2026-04",
+      "date": "2026-04-30",
+      "type": "api",
+      "platform": "kie.ai",
+      "site": null,
+      "amountUSD": 150,
+      "currency": "USD",
+      "source": "manual",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "note": "kie.ai 充值 4 月（15 笔 × $10；实际消耗 ≈ $143，月末余额 1342.3 credits）"
+    },
+    {
+      "id": "comment-throttle-2026-04",
+      "date": "2026-04-30",
+      "type": "saas",
+      "platform": "评论截流",
+      "site": null,
+      "amountUSD": 150,
+      "currency": "USD",
+      "source": "manual",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "note": "评论截流服务 4 月"
+    },
+    {
+      "id": "adsy-2026-04",
+      "date": "2026-04-30",
+      "type": "backlink",
+      "platform": "Adsy",
+      "site": null,
+      "amountUSD": 100,
+      "currency": "USD",
+      "source": "manual",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "note": "Adsy 外链 4 月"
+    },
+    {
+      "id": "openrouter-lifetime-2026-04-26",
+      "date": "2026-04-26",
       "type": "api",
       "platform": "OpenRouter",
       "site": null,
-      "amountUSD": 21.11,
+      "amountUSD": 21.98,
       "currency": "USD",
       "source": "auto:openrouter-credits-lifetime",
-      "periodStart": "2026-03-26",
-      "periodEnd": "2026-04-25",
+      "periodStart": "2026-03-27",
+      "periodEnd": "2026-04-26",
       "note": "fallback: lifetime total_usage (generation list unavailable)"
     },
     {
-      "id": "stripe-fee-musicmake.ai-2026-03-26-2026-04-25",
-      "date": "2026-04-25",
+      "id": "stripe-fee-musicmake.ai-2026-03-27-2026-04-26",
+      "date": "2026-04-26",
       "type": "infra",
       "platform": "Stripe",
       "site": "musicmake.ai",
-      "amountUSD": 3.09,
+      "amountUSD": 1.89,
       "currency": "USD",
       "source": "auto:stripe-balance-transactions",
-      "periodStart": "2026-03-26",
-      "periodEnd": "2026-04-25",
+      "periodStart": "2026-03-27",
+      "periodEnd": "2026-04-26",
       "note": "11 stripe_fee transactions"
     },
     {
-      "id": "stripe-fee-nanobanana-pro.org-2026-03-26-2026-04-25",
-      "date": "2026-04-25",
-      "type": "infra",
-      "platform": "Stripe",
-      "site": "nanobanana-pro.org",
-      "amountUSD": 1.7,
-      "currency": "USD",
-      "source": "auto:stripe-balance-transactions",
-      "periodStart": "2026-03-26",
-      "periodEnd": "2026-04-25",
-      "note": "4 stripe_fee transactions"
-    },
-    {
-      "id": "stripe-fee-img2video.io-2026-03-26-2026-04-25",
-      "date": "2026-04-25",
+      "id": "stripe-fee-img2video.io-2026-03-27-2026-04-26",
+      "date": "2026-04-26",
       "type": "infra",
       "platform": "Stripe",
       "site": "img2video.io",
       "amountUSD": 0.28,
       "currency": "USD",
       "source": "auto:stripe-balance-transactions",
-      "periodStart": "2026-03-26",
-      "periodEnd": "2026-04-25",
+      "periodStart": "2026-03-27",
+      "periodEnd": "2026-04-26",
       "note": "1 stripe_fee transactions"
     }
   ],
@@ -177,52 +257,52 @@ window.SPENDING_SNAPSHOTS = {
     {
       "source": "stripe",
       "ok": true,
-      "durationMs": 7539,
-      "note": "musicmake.ai: $3.09 / 11tx; nanobanana-pro.org: $1.70 / 4tx; sora30: $0.00 / 0tx; kling4pro.com: $0.00 / 0tx; seedance30.com: $0.00 / 0tx; seedance3video.com: $0.00 / 0tx; img2video.io: $0.28 / 1tx",
-      "recordCount": 3
+      "durationMs": 8935,
+      "note": "musicmake.ai: $1.89 / 11tx; nanobanana-pro.org: fetch failed; sora30: $0.00 / 0tx; kling4pro.com: $0.00 / 0tx; seedance30.com: $0.00 / 0tx; seedance3video.com: $0.00 / 0tx; img2video.io: $0.28 / 1tx",
+      "recordCount": 2
     },
     {
       "source": "openrouter",
       "ok": true,
-      "durationMs": 4080,
+      "durationMs": 1185,
       "note": "fallback to lifetime credits",
       "recordCount": 1
     },
     {
       "source": "cloudflare-r2",
       "ok": false,
-      "durationMs": 4188,
+      "durationMs": 2020,
       "note": "musicmake: not authorized for that account; nanobanana: not authorized for that account",
       "recordCount": 0
     },
     {
       "source": "google-ads",
       "ok": true,
-      "durationMs": 5459,
-      "note": "678.18 USD via v21; songunique.com: 678.18 USD",
+      "durationMs": 2489,
+      "note": "745.94 USD via v21; songunique.com: 745.94 USD",
       "recordCount": 1
     },
     {
       "source": "manual",
       "ok": true,
-      "durationMs": 2,
-      "note": "0/13 entries with amount>0 in window",
-      "recordCount": 0
+      "durationMs": 1,
+      "note": "4/18 entries with amount>0 in window",
+      "recordCount": 4
     }
   ],
   "monthlyArchive": {
     "2026-04": {
-      "totalUSD": 704.36,
+      "totalUSD": 1370.09,
       "byType": {
-        "ads": 678.18,
-        "api": 21.11,
-        "infra": 5.07,
-        "saas": 0,
-        "backlink": 0
+        "ads": 745.94,
+        "api": 171.98,
+        "infra": 2.17,
+        "saas": 150,
+        "backlink": 300
       },
-      "snapshotAt": "2026-04-25T07:31:11.736Z",
-      "windowFrom": "2026-03-26",
-      "windowTo": "2026-04-25",
+      "snapshotAt": "2026-04-26T16:00:44.142Z",
+      "windowFrom": "2026-03-27",
+      "windowTo": "2026-04-26",
       "note": "rolling 30 days as of windowTo"
     }
   }

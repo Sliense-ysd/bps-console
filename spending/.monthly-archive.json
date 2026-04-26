@@ -1,16 +1,16 @@
 {
   "2026-04": {
-    "totalUSD": 704.36,
+    "totalUSD": 1370.09,
     "byType": {
-      "ads": 678.18,
-      "api": 21.11,
-      "infra": 5.07,
-      "saas": 0,
-      "backlink": 0
+      "ads": 745.94,
+      "api": 171.98,
+      "infra": 2.17,
+      "saas": 150,
+      "backlink": 300
     },
-    "snapshotAt": "2026-04-25T07:31:11.736Z",
-    "windowFrom": "2026-03-26",
-    "windowTo": "2026-04-25",
+    "snapshotAt": "2026-04-26T16:00:44.142Z",
+    "windowFrom": "2026-03-27",
+    "windowTo": "2026-04-26",
     "note": "rolling 30 days as of windowTo"
   }
 }

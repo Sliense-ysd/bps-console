@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastEdited": "2026-04-25",
+  "lastEdited": "2026-04-26",
   "note": "Manual spend records. Edit by hand and re-run scripts/collect-spending.mjs. Each entry covers a specific period; the collector decides whether it falls inside the rolling 30-day window. See spending/README.md for templates.",
   "entries": [
     {
@@ -145,6 +145,61 @@
       "currency": "USD",
       "site": null,
       "note": "外链 publisher 平台合计（Notion/Telegraph/Medium/Maven/Pinterest 等如有付费）"
+    },
+    {
+      "id": "kie-2026-04",
+      "type": "api",
+      "platform": "kie.ai",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 150,
+      "currency": "USD",
+      "site": null,
+      "note": "kie.ai 充值 4 月（15 笔 × $10；实际消耗 ≈ $143，月末余额 1342.3 credits）"
+    },
+    {
+      "id": "byteplus-2026-04",
+      "type": "api",
+      "platform": "Byteplus",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 0,
+      "currency": "USD",
+      "site": null,
+      "note": "Byteplus 4 月账单待补 — 用户后补数字"
+    },
+    {
+      "id": "comment-throttle-2026-04",
+      "type": "saas",
+      "platform": "评论截流",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 150,
+      "currency": "USD",
+      "site": null,
+      "note": "评论截流服务 4 月"
+    },
+    {
+      "id": "adsy-2026-04",
+      "type": "backlink",
+      "platform": "Adsy",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 100,
+      "currency": "USD",
+      "site": null,
+      "note": "Adsy 外链 4 月"
+    },
+    {
+      "id": "daifa-2026-04",
+      "type": "backlink",
+      "platform": "代发",
+      "periodStart": "2026-04-01",
+      "periodEnd": "2026-04-30",
+      "amount": 200,
+      "currency": "USD",
+      "site": null,
+      "note": "代发外链 4 月"
     }
   ]
 }
